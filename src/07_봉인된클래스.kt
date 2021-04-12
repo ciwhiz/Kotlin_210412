@@ -27,6 +27,11 @@ enum class Color(val r: Int, val g: Int, val b: Int) {
         }
 }
 
+// 3. Java: Switch-Case Statement
+//    Kotlin: 제공되지 않습니다.
+//            "when expression"
+
+
 fun main() {
     val color = Color.RED
     println(color.r)
