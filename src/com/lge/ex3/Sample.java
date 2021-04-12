@@ -1,8 +1,16 @@
 package com.lge.ex3;
 
+class Person {
+    protected int age;
+}
+
 
 public class Sample {
     public static void main(String[] args) {
+        Person person = new Person();
+        person.age = 100;           // OK - 같은 패키지내에서 protected 필드나 메소드에 접근이 가능하다.
+
+
         String a = "Tom";
         String b = "Suwon";
         int c = 10;
