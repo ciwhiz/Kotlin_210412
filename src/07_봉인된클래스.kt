@@ -27,9 +27,41 @@ enum class Color(val r: Int, val g: Int, val b: Int) {
         }
 }
 
-// 3. Java: Switch-Case Statement
+// 3. Java: Switch-Case Statement(문)
 //    Kotlin: 제공되지 않습니다.
-//            "when expression"
+//            "when expression(식)"
+
+// Statement: 결과값이 존재하지 않습니다.
+// Expression: 결과값이 존재합니다.
+// => 코틀린은 if도 Expression 입니다.
+
+fun getName(color: Color): String {
+    return if (color == Color.RED) {
+        "Red"
+    } else {
+        "Unknown"
+    }
+
+    /*
+    return when (color) {
+        Color.RED -> "Red"
+        Color.BLUE -> "Blue"
+        Color.GREEN -> "Green"
+        Color.ORANGE -> "Orange"
+        Color.YELLOW -> "Yellow"
+    }
+    */
+
+    /*
+    when (color) {
+        Color.RED -> return "Red"
+        Color.BLUE -> return "Blue"
+        Color.GREEN -> return "Green"
+        Color.ORANGE -> return "Orange"
+        Color.YELLOW -> return "Yellow"
+    }
+    */
+}
 
 
 fun main() {
