@@ -36,6 +36,10 @@ interface Focusable {
 // open: 상속을 허용하는 키워드
 // open class Button : Clickable, Focusable {
 abstract class Button : Clickable, Focusable {
+    constructor(name: String) {
+
+    }
+
     override fun showOff() {
         super<Clickable>.showOff()  // Clickable.showOff
         super<Focusable>.showOff()  // Focusable.showOff
@@ -80,7 +84,8 @@ abstract class Button : Clickable, Focusable {
 // - open: 오버라이딩 허용
 
 // class MouseButton extends Button
-class MouseButton : Button() {
+
+class MouseButton(name: String) : Button(name) {
     override fun move(x: Int, y: Int) {
         println("Mouse Move - $x,$y")
     }
@@ -89,9 +94,20 @@ class MouseButton : Button() {
     }
 }
 
+/*
+class MouseButton : Button() {
+    override fun move(x: Int, y: Int) {
+        println("Mouse Move - $x,$y")
+    }
+
+    override fun display() {
+    }
+}
+*/
+
 
 fun main() {
-    val button: Button = MouseButton()
+    val button: Button = MouseButton("Tom")
     button.click()
     button.showOff()
 
