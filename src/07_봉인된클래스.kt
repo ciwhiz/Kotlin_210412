@@ -2,6 +2,7 @@
 package ex07
 
 import java.lang.Exception
+import java.lang.IllegalArgumentException
 
 // 1. enum class
 /*
@@ -92,7 +93,7 @@ fun getName(color: Color): String {
     */
 }
 
-
+/*
 fun main() {
     val color = Color.RED
     println(color.r)
@@ -100,6 +101,46 @@ fun main() {
     println(color.rgb()) // method
     println(color.rgb)   // property
 }
+*/
+//------------------------------------------------
+
+interface Expr
+class Num(val value: Int) : Expr
+class Sum(val left: Num, val right: Num) : Expr
+
+fun eval(e: Expr): Int {
+    return when (e) {
+        is Num -> e.value
+        is Sum -> eval(e.left) + eval(e.right)
+        else ->
+            throw IllegalArgumentException("Unknown expr")
+    }
+}
+
+fun main() {
+    val left = Num(10)
+    val right = Num(20)
+    val sum = Sum(left, right)
+
+    val result = eval(sum)
+    println(result)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
