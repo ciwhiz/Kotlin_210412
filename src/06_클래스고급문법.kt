@@ -105,7 +105,6 @@ class MouseButton : Button() {
 }
 */
 
-
 fun main() {
     val button: Button = MouseButton("Tom")
     button.click()
