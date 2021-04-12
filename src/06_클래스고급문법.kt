@@ -13,8 +13,10 @@ package ex6
 
 // 2. 여러 개의 인터페이스를 구현할 때, 구현의 충돌이 발생할 수 있습니다.
 interface Clickable {
+    // open fun
     fun click()
 
+    // open fun
     fun showOff() {
         println("Clickable")
     }
@@ -32,7 +34,8 @@ interface Focusable {
 
 
 // open: 상속을 허용하는 키워드
-open class Button : Clickable, Focusable {
+// open class Button : Clickable, Focusable {
+abstract class Button : Clickable, Focusable {
     override fun showOff() {
         super<Clickable>.showOff()  // Clickable.showOff
         super<Focusable>.showOff()  // Focusable.showOff
@@ -48,6 +51,19 @@ open class Button : Clickable, Focusable {
     open fun move(x: Int, y: Int) {
         println("Move - $x,$y")
     }
+
+    // open: Soft Keyword
+    // - open class
+    // - open fun
+
+    // Java: final void open() {}
+    fun open() {
+
+    }
+
+    // open fun
+    abstract fun display()
+
 }
 
 // 상속의 문제점
@@ -67,6 +83,9 @@ open class Button : Clickable, Focusable {
 class MouseButton : Button() {
     override fun move(x: Int, y: Int) {
         println("Mouse Move - $x,$y")
+    }
+
+    override fun display() {
     }
 }
 
