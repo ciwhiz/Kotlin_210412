@@ -6,8 +6,9 @@ import java.util.*
 
 // - VO(Value Object)
 // - DAO(Database Access Object)
-// - DTO(Data Transfer ObjecT)
+// - DTO(Data Transfer Object)
 
+/*
 class User(val name: String, val age: Int) {
     override fun toString(): String {
         return "User(name=$name, age=$age)"
@@ -28,7 +29,25 @@ class User(val name: String, val age: Int) {
     override fun hashCode(): Int {
         return Objects.hash(name, age)
     }
+
+    /*
+    constructor(other: User) {
+
+    }
+    */
+    fun copy(): User {
+        return User(name, age)
+    }
+
+    // Kotlin에서는 "clone/finalize" 더 이상 정의할 수 없습니다.
+    // "finalize" 문제점
+    // 1. 정확한 호출 시점을 알 수 없다.
+    // 2. 자식 클래스가 부모의 finalize를 명시적으로 호출하지 않으면, 호출되지 않는다.
+    // 3. 호출되는 것이 보장되지 않는다.
 }
+*/
+
+data class User(val name: String, val age: Int)
 
 fun main() {
     val user = User("Tom", 42)
@@ -45,6 +64,6 @@ fun main() {
     }
 
     // 3. 객체 복제
-
-
+    val user3 = user.copy()
+    println(user3)
 }

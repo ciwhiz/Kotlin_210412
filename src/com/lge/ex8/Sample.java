@@ -66,13 +66,15 @@ class Point {
         y = rhs.y;
     }
 
-    @Override
-    public String toString() {
-        return "Point{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Point{" +
+//                "x=" + x +
+//                ", y=" + y +
+//                '}';
+//    }
+
+
 }
 
 public class Sample {
