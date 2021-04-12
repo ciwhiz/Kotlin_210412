@@ -6,11 +6,13 @@ package ex5
 //  var: getter + setter
 //  val: getter
 
-class User(val name: String, var age: Int)
+class User(private val name: String, var age: Int)
 
 fun main() {
     val user = User("Tom", 42)
 
     user.age = 100     // setAge
     println(user.age)  // getAge
+
+    // println(user.name)
 }
