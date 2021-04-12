@@ -1,6 +1,10 @@
 // 03_클래스문법.kt
 package ex3
 
+import com.lge.ex3.User as JUser
+
+// Aliasing
+
 class Car {
     /*
     fun go() {
@@ -26,6 +30,7 @@ class Car {
     }
 }
 
+/*
 fun main() {
     val car = Car()
     val a = 100
@@ -60,6 +65,50 @@ fun main() {
         speed = a,
     )
 }
+*/
+
+// Kotlin 에서는 더 이상 Builder Pattern을 통해
+// 객체 생성을 하는 것을 선호하지 않습니다.
+
+/*
+class User {
+    var name: String
+    var address: String
+    var age: Int
+    var level: Int
+
+    constructor(name: String, address: String = "", age: Int = 0, level: Int = 0) {
+        this.name = name
+        this.address = address
+        this.age = age
+        this.level = level
+    }
+}
+*/
+class User(
+    var name: String,
+    var address: String = "",
+    var age: Int = 0,
+    var level: Int = 0
+)
+
+fun main() {
+    val user = User(
+        "Tom",
+        address = "Seoul",
+        age = 42,
+        level = 1,
+    )
+
+    // import com.lge.ex3.User as JUser
+    val b = JUser.Builder("Tom")
+        .setAddress("Seoul")
+        .setAge(42)
+        .setLevel(1)
+        .build()
+}
+
+
 
 
 
