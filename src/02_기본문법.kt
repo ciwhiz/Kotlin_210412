@@ -95,7 +95,46 @@ class User {
 // class User constructor(private var name: String, private var age: Int)
 
 // Version 3.
+//  - Primary Constructor
 class User(private var name: String, private var age: Int)
+
+
+fun main() {
+    // User user = new User("Tom", 42);
+    // var user: User = User("Tom", 42)
+
+    // final User user = new User("Tom", 42);
+    val user1 = User("Tom", 42)
+    val user2 = user1
+
+    if (user1 === user2) {
+        println("동일한 참조값")
+    } else {
+        println("동일한 참조값 아닙니다.")
+    }
+
+    if (user1 == user2) {
+        println("동일한 속성")
+    } else {
+        println("동일한 속성 아닙니다")
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
