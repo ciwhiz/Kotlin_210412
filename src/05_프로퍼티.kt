@@ -2,13 +2,15 @@
 package ex5
 
 // 프로퍼티(Property)
+//  1) Backing Field가 있는 프로퍼티
+
 // => 접근자 메소드를 자동으로 생성하는 기술
 //  var: getter + setter
 //  val: getter
 
 // class User(private val name: String, var age: Int)
 // - getter / setter 내부에서 필드의 값을 읽어올 수 있는 field 라는 키워드를 사용해야 합니다.
-
+/*
 class User {
     val name: String
         get() {
@@ -44,3 +46,44 @@ fun main() {
     // user.address = "XXX"
     println(user.address)
 }
+*/
+
+//  2) Backing Field가 없는 프로퍼티: 메소드의 가독성을 높이기 위해 사용한다.
+class User(var firstName: String, var lastName: String) {
+
+    // Backing Field가 없는 프로퍼티 - 메소드
+    var fullName: String
+        get() {
+            return "$firstName, $lastName"
+        }
+        set(value) {
+            val arr = value.split(", ")
+            firstName = arr[0]
+            lastName = arr[1]
+        }
+}
+
+fun main() {
+    val user = User("Gildong", "Hong")
+    println(user.fullName)
+
+    user.fullName = "Soonshin, Lee"
+    println(user.firstName)
+    println(user.lastName)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
