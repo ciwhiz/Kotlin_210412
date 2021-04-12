@@ -54,9 +54,7 @@ fun main() {
     val result2 = people.sortedWith(Person.NameComparator)
     println(result2)
 
-
     val files = listOf(File("/z"), File("/A"))
-
     // - 정책을 사용할 때마다 정책 클래스를 생성해야 합니다.
     // val result = files.sortedWith(CaseInsensitiveFileComparator())
     val result = files.sortedWith(CaseInsensitiveFileComparator)
