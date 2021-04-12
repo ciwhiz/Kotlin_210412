@@ -85,7 +85,20 @@ class User {
     }
 }
 */
+
+// public 기본입니다.
+/*
 class User(
+    var name: String,
+    var address: String = "",
+    var age: Int = 0,
+    var level: Int = 0
+)
+*/
+
+// @JvmOverloads - Kotlin의 코드가 자바에서 사용될 때
+//                 오버로딩으로 제공됩니다.
+class User @JvmOverloads constructor(
     var name: String,
     var address: String = "",
     var age: Int = 0,

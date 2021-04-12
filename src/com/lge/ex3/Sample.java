@@ -13,6 +13,10 @@ public class Sample {
                 .setAge(c)
                 .setLevel(d)
                 .build();
+
+        ex3.User user2 = new ex3.User("Tom", "Suwon", 10);
+        ex3.User user3 = new ex3.User("Tom", "Suwon");
+        ex3.User user4 = new ex3.User("Tom");
     }
 }
 
