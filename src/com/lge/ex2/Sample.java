@@ -8,6 +8,35 @@ class User {
         this.name = name;
         this.age = age;
     }
+
+    // Object.equals
+    @Override
+    public boolean equals(Object obj) {
+        // 1. 동일한 참조인지 확인한다.
+        if (this == obj) {
+            return true;
+        }
+
+        // 2. null인 체크해야 합니다.
+        if (obj == null) {
+            return false;
+        }
+
+        // 3. User 타입인지 체크한다.
+        // if (obj.getClass() != User.class) {
+        //    return false;
+        // }
+
+        if (!(obj instanceof User)) {
+            return false;
+        }
+
+        User other = (User) obj;
+
+        // 4. 내부의 속성을 비교한다.
+        return age == other.age &&
+                name.equals(other.name);
+    }
 }
 
 
@@ -17,7 +46,8 @@ public class Sample {
 
     public static void main(String[] args) {
         User user1 = new User("Tom", 42);
-        User user2 = user1;
+        // User user2 = user1;
+        User user2 = new User("Tom", 42);
 
         // 참조 동등성
         if (user1 == user2) {

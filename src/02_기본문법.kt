@@ -96,7 +96,38 @@ class User {
 
 // Version 3.
 //  - Primary Constructor
-class User(private var name: String, private var age: Int)
+
+// 1. Object    -> Kotlin.Any
+// 2. @Override -> override
+
+// 3. Nullable
+//    - 일반적인 타입은 null을 가질 수 없습니다.
+//    - null 가능성이 있는 타입만 null을 가질 수 있습니다.
+//    -  Any: null X
+//      Any?: null 가능성이 있습니다.
+//            "반드시 null 체크를 수행해야 합니다."
+
+class User(private var name: String, private var age: Int) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other)
+            return true
+
+        // Any?
+        if (other === null)
+            return false
+
+        // Any? -> Any
+        if (other !is User) {
+            return false
+        }
+        // Any -> User
+
+        // Smart cast: 컴파일러가 코드를 통해 자동으로 캐스팅을
+        //             수행합니다.
+        return age == other.age &&
+                name == other.name
+    }
+}
 
 
 fun main() {
@@ -105,7 +136,8 @@ fun main() {
 
     // final User user = new User("Tom", 42);
     val user1 = User("Tom", 42)
-    val user2 = user1
+    // val user2 = user1
+    val user2 = User("Tom", 42)
 
     if (user1 === user2) {
         println("동일한 참조값")
@@ -118,7 +150,6 @@ fun main() {
     } else {
         println("동일한 속성 아닙니다")
     }
-
 
 
 }
