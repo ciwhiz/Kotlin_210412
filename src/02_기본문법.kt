@@ -119,10 +119,19 @@ class User(private var name: String, private var age: Int) {
             return false
 
         // Any? -> Any
+        /*
         if (other !is User) {
             return false
         }
-        // Any -> User
+        */
+
+        if (other.javaClass != User::class.java) {
+            return false
+        }
+
+        // 명시적인 캐스팅
+        //  : Any -> User
+        other as User
 
         // Smart cast: 컴파일러가 코드를 통해 자동으로 캐스팅을
         //             수행합니다.
@@ -141,8 +150,9 @@ fun main() {
     // var user: User = User("Tom", 42)
 
     // final User user = new User("Tom", 42);
-    val user1 = User("Tom", 42)
+    // val user1 = User("Tom", 42)
     // val user2 = user1
+    val user1 = null
     val user2 = User("Tom", 42)
 
     if (user1 === user2) {
