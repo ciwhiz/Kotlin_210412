@@ -8,7 +8,6 @@ import java.util.*
 // - DAO(Database Access Object)
 // - DTO(Data Transfer Object)
 
-
 class User(val name: String, val age: Int) {
     override fun toString(): String {
         return "User(name=$name, age=$age)"
@@ -35,7 +34,7 @@ class User(val name: String, val age: Int) {
 
     }
     */
-    fun copy(): User {
+    fun copy(name: String = this.name, age: Int = this.age): User {
         return User(name, age)
     }
 
@@ -58,7 +57,14 @@ class User(val name: String, val age: Int) {
 }
 
 
-// data class User(val name: String, val age: Int)
+/*
+data class User(val name: String, val age: Int) {
+    override fun toString(): String {
+        return "User{name=$name, age=$age}!"
+    }
+}
+*/
+
 // 반드시 한개 이상의 프로퍼티가 존재해야 합니다.
 // data class Person(val name: String)
 
@@ -85,8 +91,10 @@ fun main() {
     }
 
     // 4. 내부의 프로퍼티 중에서 변경을 수행할 수 있습니다.
-    // val user4 = user.copy(name = "Bob")  // name은 다른 값으로 변경됩니다.
-    // val user5 = user.copy(age = 100)
+    val user4 = user.copy(name = "Bob")  // name은 다른 값으로 변경됩니다.
+    println("xxx - $user4")
+    val user5 = user.copy(age = 100)
+    println("yyy - $user5")
 
     println(user3)
 
@@ -105,5 +113,4 @@ fun main() {
     for ((name, age) in users) {
         println("name=$name, age=$age")
     }
-
 }
