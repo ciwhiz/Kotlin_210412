@@ -16,7 +16,9 @@ class Button : View {
     // Kotlin
     //  - 기본이 Nested class 입니다.
     //  - inner 키워드를 통해 내부 클래스를 만들 수 있습니다.
-    inner class ButtonState(val name: String) : State
+    // inner class ButtonState(val name: String) : State
+
+    class ButtonState(val name: String) : State
 
     override var state: State
         get() {
