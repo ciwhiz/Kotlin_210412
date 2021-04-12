@@ -1,6 +1,8 @@
 // 02_기본문법.kt
 package ex2
 
+import java.util.*
+
 // 1. main 함수를 만드는 방법
 // 2. 함수를 만드는 방법
 //   1) 전역 함수를 만드는 것이 가능합니다.
@@ -126,6 +128,10 @@ class User(private var name: String, private var age: Int) {
         //             수행합니다.
         return age == other.age &&
                 name == other.name
+    }
+
+    override fun hashCode(): Int {
+        return Objects.hash(age, name)
     }
 }
 

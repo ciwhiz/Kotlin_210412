@@ -1,5 +1,9 @@
 package com.lge.ex2;
 
+
+import java.util.Objects;
+
+// equals를 재정의하면 반드시 hashCode도 재정의해야 합니다.
 class User {
     private String name;
     private int age;
@@ -36,6 +40,11 @@ class User {
         // 4. 내부의 속성을 비교한다.
         return age == other.age &&
                 name.equals(other.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(age, name);
     }
 }
 
