@@ -73,7 +73,6 @@ class Cursor {
 //  - IODH(Initialization on Demand Holder)
 //  1) static final 필드에 대해서는 스레드 안전하게 초기화된다. - JLS
 //  2) 중첩 클래스의 static 필드는 클래스 로드 시점이 아닌 첫 접근 시점에 초기화된다. - JLS
-
 class Cursor {
     static class Singleton {
         private static final Cursor INSTANCE = new Cursor();
