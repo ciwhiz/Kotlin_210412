@@ -104,9 +104,11 @@ fun main() {
 */
 //------------------------------------------------
 
+/*
 interface Expr
 class Num(val value: Int) : Expr
-class Sum(val left: Num, val right: Num) : Expr
+class Sum(val left: Expr, val right: Expr) : Expr
+
 
 fun eval(e: Expr): Int {
     return when (e) {
@@ -121,14 +123,37 @@ fun main() {
     val left = Num(10)
     val right = Num(20)
     val sum = Sum(left, right)
+    val sum2 = Sum(left, sum)
 
-    val result = eval(sum)
+    val result = eval(sum2)
     println(result)
 }
+*/
 
+// 봉인된 클래스(sealed class)
+sealed class Expr
+// 위의 클래스에 대한 하위 클래스를 같은 파일에서만 만들 수 있습니다.
 
+class Num(val value: Int) : Expr()
+class Sum(val left: Expr, val right: Expr) : Expr()
 
+fun eval(e: Expr): Int {
+    // 컴파일러는 Expr의 하위 클래스가 더 이상 존재하지 않는 다는 것을 알 수 있습니다.
+    return when (e) {
+        is Num -> e.value
+        is Sum -> eval(e.left) + eval(e.right)
+    }
+}
 
+fun main() {
+    val left = Num(10)
+    val right = Num(20)
+    val sum = Sum(left, right)
+    val sum2 = Sum(left, sum)
+
+    val result = eval(sum2)
+    println(result)
+}
 
 
 
