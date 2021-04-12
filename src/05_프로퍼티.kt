@@ -48,10 +48,15 @@ fun main() {
 }
 */
 
-//  2) Backing Field가 없는 프로퍼티: 메소드의 가독성을 높이기 위해 사용한다.
+//  2) Backing Field가 없는 프로퍼티: 메소드의 '가독성'을 높이기 위해 사용한다.
 class User(var firstName: String, var lastName: String) {
 
     // Backing Field가 없는 프로퍼티 - 메소드
+    //  - Swift: 계산형 프로퍼티
+
+    // Initializer is not allowed here because this property has no backing field
+    // var fullName: String = "xxx"
+
     var fullName: String
         get() {
             return "$firstName, $lastName"
