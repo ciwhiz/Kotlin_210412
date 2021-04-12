@@ -29,7 +29,10 @@ interface Focusable {
 }
 
 // class Button implements Clickable implements Focusable
-class Button : Clickable, Focusable {
+
+
+// open: 상속을 허용하는 키워드
+open class Button : Clickable, Focusable {
     override fun showOff() {
         super<Clickable>.showOff()  // Clickable.showOff
         super<Focusable>.showOff()  // Focusable.showOff
@@ -41,13 +44,39 @@ class Button : Clickable, Focusable {
     override fun click() {
         println("Button click")
     }
+
+    open fun move(x: Int, y: Int) {
+        println("Move - $x,$y")
+    }
 }
 
-fun main() {
-    val button = Button()
-    button.click()
+// 상속의 문제점
+// 1. 기반 클래스를 변경할 경우, 하위 클래스의 동작이 예기치 않게 변경될 수 있습니다.
+// 2. 상속을 위한 설계와 문서를 갖추거나, 그럴 수 없다면 상속을 금지해라 - Effective Java
 
+// 상속
+// 1. 코틀린의 기본 클래스는 상속이 금지되어 있습니다.
+// Java: final class Button {}
+// Kotlin: class Button
+// - open: 상속 허용
+
+// 2. 코틀린의 기본 메소드는 오버라이딩이 금지되어 있습니다.
+// - open: 오버라이딩 허용
+
+// class MouseButton extends Button
+class MouseButton : Button() {
+    override fun move(x: Int, y: Int) {
+        println("Mouse Move - $x,$y")
+    }
+}
+
+
+fun main() {
+    val button: Button = MouseButton()
+    button.click()
     button.showOff()
+
+    button.move(10, 20)
 }
 
 
