@@ -2,11 +2,11 @@
 package ex5
 
 // 프로퍼티(Property)
-//  1) Backing Field가 있는 프로퍼티
-
 // => 접근자 메소드를 자동으로 생성하는 기술
 //  var: getter + setter
 //  val: getter
+
+//  1) Backing Field가 있는 프로퍼티
 
 // class User(private val name: String, var age: Int)
 // - getter / setter 내부에서 필드의 값을 읽어올 수 있는 field 라는 키워드를 사용해야 합니다.
@@ -55,7 +55,6 @@ class User(var firstName: String, var lastName: String) {
 
     // Initializer is not allowed here because this property has no backing field
     // var fullName: String = "xxx"
-
     var fullName: String
         get() {
             // firstName = "xxx"
