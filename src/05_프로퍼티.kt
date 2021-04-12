@@ -23,6 +23,10 @@ class User {
             field = value - 1
         }
 
+    // 의도: 외부에서 값을 읽는 것은 가능하지만, 변경하는 것은 불가능하도록 하고 싶다.
+    var address: String = "Suwon"
+        private set
+
     constructor(name: String, age: Int) {
         this.name = name
         this.age = age
@@ -36,4 +40,7 @@ fun main() {
     println(user.age)  // getAge
 
     println(user.name)
+
+    // user.address = "XXX"
+    println(user.address)
 }
