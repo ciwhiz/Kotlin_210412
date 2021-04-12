@@ -144,7 +144,7 @@ class User(private var name: String, private var age: Int) {
     }
 }
 
-
+/*
 fun main() {
     // User user = new User("Tom", 42);
     // var user: User = User("Tom", 42)
@@ -166,8 +166,25 @@ fun main() {
     } else {
         println("동일한 속성 아닙니다")
     }
+}
+*/
 
+// 5) 기본 연산자 - 비트 연산자
+// Java: <<, >>(산술), >>>(논리), &, |, ^, ~
 
+fun main() {
+    // 2진수 리터럴
+    val n = 0b11001111
+    println(n)
+
+    println(n shl 2)  // n << 2
+    println(n shr 2)  // n >> 2
+    println(n ushr 2) // n >>> 2
+
+    println(n and 0b1111) // n & 0xf
+    println(n or 0b1111)  // n | 0xf
+    println(n xor 0b1111) // n ^ 0xf
+    println(n.inv())      // ~n
 }
 
 
