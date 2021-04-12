@@ -131,6 +131,7 @@ fun main() {
 */
 
 // 봉인된 클래스(sealed class)
+// = 봉인된 인터페이스(sealed interface) - 1.5
 sealed class Expr
 // 위의 클래스에 대한 하위 클래스를 같은 파일에서만 만들 수 있습니다.
 
