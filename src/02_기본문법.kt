@@ -46,6 +46,7 @@ fun add(a: Int, b: Int): Int {
 }
 
 // 1.3 버전부터는 args에 대한 부분을 사용하지 않을 때 생략이 가능합니다.
+/*
 fun main() {
     // val n = 42
     // val l: Long = n.toLong()
@@ -60,6 +61,43 @@ fun main() {
     // println("Hello, Kotlin")
     // println(print())
 }
+*/
+
+// 4) 클래스 문법
+/*
+class User {
+    private String name;
+    private int age;
+
+    User(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+*/
+
+/*
+// Version 1.
+class User {
+    private var name: String
+    private var age: Int
+
+    constructor(name: String, age: Int) {
+        this.name = name
+        this.age = age
+    }
+}
+*/
+
+// Version 2.
+//  - constructor에 대해서 접근 지정 레벨을 변경하거나, 어노테이션을 사용하지 않는다면,
+//    생략이 가능합니다.
+// class User constructor(private var name: String, private var age: Int)
+
+// Version 3.
+class User(private var name: String, private var age: Int)
+
+
 
 
 
