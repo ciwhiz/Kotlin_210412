@@ -47,16 +47,15 @@ fun add(a: Int, b: Int): Int {
 
 // 1.3 버전부터는 args에 대한 부분을 사용하지 않을 때 생략이 가능합니다.
 fun main() {
-    val n = 42
-    val l: Long = n.toLong()
+    // val n = 42
+    // val l: Long = n.toLong()
+
+    val n: Long = Int.MAX_VALUE.toLong() + 1
+    val n2 = n.toInt()
 
     println(n)
-    println(l)
-
-
+    println(n2)
     // 42.toString()
-
-
 
     // println("Hello, Kotlin")
     // println(print())
