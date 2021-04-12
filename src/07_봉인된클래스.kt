@@ -1,6 +1,8 @@
 // 07_봉인된클래스
 package ex07
 
+import java.lang.Exception
+
 // 1. enum class
 /*
 enum class Color {
@@ -34,6 +36,33 @@ enum class Color(val r: Int, val g: Int, val b: Int) {
 // Statement: 결과값이 존재하지 않습니다.
 // Expression: 결과값이 존재합니다.
 // => 코틀린은 if도 Expression 입니다.
+fun mix(c1: Color, c2: Color): Color {
+    val s: Set<Color> = setOf(c1, c2)
+
+    return if (s == setOf(Color.RED, Color.YELLOW))
+        Color.ORANGE
+    else if (s == setOf(Color.BLUE, Color.YELLOW))
+        Color.GREEN
+    else
+        throw Exception("Unknown")
+
+    /*
+    return when (s) {
+        setOf(Color.RED, Color.YELLOW) -> Color.ORANGE
+        setOf(Color.BLUE, Color.YELLOW) -> Color.GREEN
+        else -> throw Exception("Unknown")
+    }
+    */
+}
+
+
+fun getWarmth(color: Color): String {
+    return when (color) {
+        Color.RED, Color.YELLOW, Color.ORANGE -> "Warmth"
+        Color.BLUE -> "Cold"
+        else -> "Unknown"
+    }
+}
 
 fun getName(color: Color): String {
     return if (color == Color.RED) {
