@@ -53,6 +53,14 @@ fun main() {
 }
 */
 
+/*
+fun <T> observable(initialValue: T, onChange: (property: KProperty<*>, oldValue: T, newValue: T) -> Unit): ReadWriteProperty<Any?, T> {
+    return object : ObservableProperty<T>(initialValue) {
+        override fun afterChange(property: KProperty<*>, oldValue: T, newValue: T) = onChange(property, oldValue, newValue)
+    }
+}
+*/
+
 // 2. 프로퍼티의 값의 변경에 따라 수행되는 로직을 캡슐화하는 목적 - Delegates.observable
 //    - KVO(Key-Value Observation)
 class TextView {

@@ -58,15 +58,28 @@ class SampleDelegate<T>(
     }
 }
 
-fun <T> foo(initialValue: T): ReadWriteProperty<Any, T> {
+/*
+fun <T> observable(initialValue: T, onChange: (property: KProperty<*>, oldValue: T, newValue: T) -> Unit): ReadWriteProperty<Any?, T> {
     return object : ObservableProperty<T>(initialValue) {
-        override fun afterChange(property: KProperty<*>, oldValue: T, newValue: T) {}
+        override fun afterChange(property: KProperty<*>, oldValue: T, newValue: T) = onChange(property, oldValue, newValue)
     }
+}
+*/
+
+fun <T> observable(initialValue: T, onChange: (oldValue: T, newValue: T) -> Unit): SampleDelegate<T> {
+    return SampleDelegate(initialValue, object : OnValueChanged<T> {
+        override fun onChangedValue(old: T, new: T) = onChange(old, new)
+    }, null)
 }
 
 
 class User {
+    var name: String by observable("Alice") { old, new ->
+        println("name: $old -> $new")
+    }
+
     // Backing Field 가 없는 프로퍼티
+    /*
     var name: String by SampleDelegate(
         "Alice",
         object : OnValueChanged<String> {
@@ -80,6 +93,7 @@ class User {
             }
         }
     )
+    */
 
     var age: Int by SampleDelegate(0,
         object : OnValueChanged<Int> {
@@ -96,6 +110,13 @@ class User {
     var address: String by Delegates.observable("xxx") { _, _, _ ->
     }
     var address2: String by foo("xxx")
+}
+
+
+fun <T> foo(initialValue: T): ReadWriteProperty<Any, T> {
+    return object : ObservableProperty<T>(initialValue) {
+        override fun afterChange(property: KProperty<*>, oldValue: T, newValue: T) {}
+    }
 }
 
 
