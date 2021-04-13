@@ -93,7 +93,6 @@ class User {
             }
         })
 
-
     var address: String by Delegates.observable("xxx") { _, _, _ ->
     }
     var address2: String by foo("xxx")
