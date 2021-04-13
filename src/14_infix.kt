@@ -31,7 +31,7 @@ fun main() {
         pair2,
     )
     */
-    
+
     val map = mapOf(
         "name" to "Tom",
         "age" to 42,
