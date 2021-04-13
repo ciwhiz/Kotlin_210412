@@ -1,6 +1,8 @@
 // 12_확장함수
 package ex12
 
+import java.lang.StringBuilder
+
 // (Int, Int) -> Unit
 fun move(x: Int, y: Int) {
     println("Global move")
@@ -56,9 +58,60 @@ fun lastChar(text: String): Char {
 }
 */
 
+//  (String) -> Char
 // fun lastChar(text: String): Char = text[text.length - 1]
-fun String.lastChar(): Char = this[length - 1]
+// -> lastChar("hello")
 
+
+//  (String) -> Char
+fun String.lastChar(): Char = this[length - 1]
+// -> "hello".lastChar()
+// String.: 수신 객체 타입
+//    this: 수신 객체 참조
+
+
+/*
+fun <E> joinToString(
+    collection: Collection<E>,
+    separator: String,
+    prefix: String,
+    postfix: String
+): String {
+    val result = StringBuilder(prefix)
+    for ((index, element) in collection.withIndex()) {
+        if (index > 0)
+            result.append(separator)
+        result.append(element)
+    }
+    result.append(postfix)
+    return result.toString()
+}
+*/
+
+fun <E> Collection<E>.joinToString(
+    separator: String,
+    prefix: String,
+    postfix: String
+): String {
+    val result = StringBuilder(prefix)
+    for ((index, element) in withIndex()) {
+        if (index > 0)
+            result.append(separator)
+        result.append(element)
+    }
+    result.append(postfix)
+    return result.toString()
+}
+
+fun main() {
+    val list = listOf(1, 2, 3, 4, 5)
+    // val result = joinToString(list, separator = ", ", prefix = "<", postfix = ">")
+    val result = list.joinToString(separator = ", ", prefix = "<", postfix = ">")
+    println(result)
+}
+
+
+/*
 fun main() {
     val text = "hello"
 
@@ -67,6 +120,7 @@ fun main() {
 
     println(result)
 }
+*/
 
 
 
