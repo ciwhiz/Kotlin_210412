@@ -27,3 +27,10 @@ fun main() {
     sb.lastChar = 'x'
     println(sb.toString())
 }
+
+// 확장 함수 / 확장 프로퍼티
+// - 주의할 점: 함부로 작성하는 것이 좋지 않습니다.
+
+
+
+
