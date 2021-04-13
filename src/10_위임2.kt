@@ -85,6 +85,19 @@ class User {
 
 }
 
+class SampleDelegate2 {
+    val value: String
+        get() {
+            return "Bob"
+        }
+}
+
+
+class Person {
+    // val name: String by SampleDelegate2()
+}
+
+
 fun main() {
     val user = User()
     user.name = "Bob"
