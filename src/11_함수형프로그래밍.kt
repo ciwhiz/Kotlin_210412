@@ -41,7 +41,11 @@ fun foo(a: Char, b: Double): String = ""
 fun goo(a: Int, b: Double, c: Float) {}
 
 fun main() {
-    val fn3: (Int, Double, Float) -> Unit = ::goo
+    // 명시적인 타입 지정
+    // val fn3: (Int, Double, Float) -> Unit = ::goo
+
+    // 암묵적인 타입 추론
+    val fn3 = ::goo
     fn3(42, 3.14, 3.14f)
 
     val fn2: (Char, Double) -> String = ::foo
