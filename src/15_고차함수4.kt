@@ -56,9 +56,10 @@ fun main() {
     // val result1 = list.filter(modulo(2, 1))
     println(result1)
 
-
     val result2 = list.filter(modulo(2, 0))
     println(result2)
+
+    // modulo(2,1)(3) - 커링
 }
 
 
