@@ -25,6 +25,10 @@ fun main() {
     fn = user::move   // Bound reference - this의 객체가 이미 bind 되었다.
     fn(10, 20)
 
-    user.move(10, 20) // User::move(user, 10, 20)
-    fn2(user, 10, 20)
+    val obj = User()
+    fn = obj::move
+    fn(20, 30)
+
+    // user.move(10, 20) // User::move(user, 10, 20)
+    // fn2(user, 10, 20)
 }
