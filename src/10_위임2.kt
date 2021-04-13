@@ -24,24 +24,24 @@ class SampleDelegate {
 // and thus it cannot serve as a delegate for var (read-write property)
 
 
-interface OnValueChanged {
-    fun onChangedValue(old: String, new: String)
+interface OnValueChanged<T> {
+    fun onChangedValue(old: T, new: T)
 }
 
-interface Predicate {
-    fun test(value: String): Boolean
+interface Predicate<T> {
+    fun test(value: T): Boolean
 }
 
-class SampleDelegate(
-    var field: String,
-    var onValueChanged: OnValueChanged? = null,
-    var predicate: Predicate? = null,
+class SampleDelegate<T>(
+    var field: T,
+    var onValueChanged: OnValueChanged<T>? = null,
+    var predicate: Predicate<T>? = null,
 ) {
-    operator fun getValue(thisRef: User, property: KProperty<*>): String {
+    operator fun getValue(thisRef: User, property: KProperty<*>): T {
         return field
     }
 
-    operator fun setValue(thisRef: User, property: KProperty<*>, newValue: String) {
+    operator fun setValue(thisRef: User, property: KProperty<*>, newValue: T) {
         val oldValue = field
 
         // val result = predicate?.test(newValue)
@@ -59,12 +59,12 @@ class User {
     // Backing Field 가 없는 프로퍼티
     var name: String by SampleDelegate(
         "Alice",
-        object : OnValueChanged {
+        object : OnValueChanged<String> {
             override fun onChangedValue(old: String, new: String) {
                 println("name: $old -> $new")
             }
         },
-        object : Predicate {
+        object : Predicate<String> {
             override fun test(value: String): Boolean {
                 return value.length >= 5
             }
