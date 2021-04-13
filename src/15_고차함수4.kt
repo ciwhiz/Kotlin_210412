@@ -49,8 +49,13 @@ fun main() {
     val list = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
     // val result = list.filter(isOdd)
 
-    val result1 = list.filter(modulo(2, 1))
+    val result1 = list.filter { e ->
+        e % 2 == 1
+    }
+
+    // val result1 = list.filter(modulo(2, 1))
     println(result1)
+
 
     val result2 = list.filter(modulo(2, 0))
     println(result2)
