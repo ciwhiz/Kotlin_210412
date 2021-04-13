@@ -59,7 +59,6 @@ fun main() {
         }
     }
 
-
     window.click()
     window.enter()
 }
