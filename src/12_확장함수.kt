@@ -46,6 +46,9 @@ fun main() {
 
 //   => 확장 함수(수평 확장)
 //    : 사용자가 정의한 '함수'가 기존 클래스의 '메소드'처럼 보이게 하는 기술
+//       C#: Extension Function
+//    Swift: Extension
+//     ObjC: Category
 
 /*
 fun lastChar(text: String): Char {
