@@ -92,7 +92,6 @@ fun main() {
 
 // 4. KVC(Key-Value Coding)
 //  : Map을 이용해서 프로퍼티의 값을 읽을 수 있습니다.
-
 class Point(json: Map<String, Any>) {
     val x: Int by json
     val y: Int by json

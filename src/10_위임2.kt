@@ -1,6 +1,9 @@
 // 10_위임2
 package ex10_2
 
+import kotlin.properties.Delegates
+import kotlin.properties.ObservableProperty
+import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 // 프로퍼티 위임
@@ -55,6 +58,13 @@ class SampleDelegate<T>(
     }
 }
 
+fun <T> foo(initialValue: T): ReadWriteProperty<Any, T> {
+    return object : ObservableProperty<T>(initialValue) {
+        override fun afterChange(property: KProperty<*>, oldValue: T, newValue: T) {}
+    }
+}
+
+
 class User {
     // Backing Field 가 없는 프로퍼티
     var name: String by SampleDelegate(
@@ -83,18 +93,10 @@ class User {
             }
         })
 
-}
 
-class SampleDelegate2 {
-    val value: String
-        get() {
-            return "Bob"
-        }
-}
-
-
-class Person {
-    // val name: String by SampleDelegate2()
+    var address: String by Delegates.observable("xxx") { _, _, _ ->
+    }
+    var address2: String by foo("xxx")
 }
 
 
