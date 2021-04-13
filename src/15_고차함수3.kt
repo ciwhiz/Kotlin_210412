@@ -16,7 +16,6 @@ fun filter(data: List<Int>, predicate: (Int) -> Boolean): List<Int> {
     return result
 }
 
-
 fun main() {
     val list = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
     val result1 = filter(list, ::isOdd)
