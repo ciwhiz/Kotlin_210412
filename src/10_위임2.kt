@@ -70,11 +70,25 @@ class User {
             }
         }
     )
+
+    var age: Int by SampleDelegate(0,
+        object : OnValueChanged<Int> {
+            override fun onChangedValue(old: Int, new: Int) {
+                println("age: $old -> $new")
+            }
+        },
+        object : Predicate<Int> {
+            override fun test(value: Int): Boolean {
+                return value >= 1
+            }
+        })
+
 }
 
 fun main() {
     val user = User()
     user.name = "Bob"
+    user.age = -100
 
     println(user.name)
 }
