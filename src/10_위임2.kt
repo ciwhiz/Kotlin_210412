@@ -28,28 +28,49 @@ interface OnValueChanged {
     fun onChangedValue(old: String, new: String)
 }
 
-class SampleDelegate(var field: String, var onValueChanged: OnValueChanged? = null) {
+interface Predicate {
+    fun test(value: String): Boolean
+}
+
+class SampleDelegate(
+    var field: String,
+    var onValueChanged: OnValueChanged? = null,
+    var predicate: Predicate? = null,
+) {
     operator fun getValue(thisRef: User, property: KProperty<*>): String {
         return field
     }
 
     operator fun setValue(thisRef: User, property: KProperty<*>, newValue: String) {
         val oldValue = field
-        field = newValue
 
+        // val result = predicate?.test(newValue)
+        val predicate = predicate
+        if (predicate != null && predicate.test(newValue).not()) {
+            return
+        }
+
+        field = newValue
         onValueChanged?.onChangedValue(oldValue, newValue)
     }
 }
 
 class User {
     // Backing Field 가 없는 프로퍼티
-    var name: String by SampleDelegate("Alice", object : OnValueChanged {
-        override fun onChangedValue(old: String, new: String) {
-            println("name: $old -> $new")
+    var name: String by SampleDelegate(
+        "Alice",
+        object : OnValueChanged {
+            override fun onChangedValue(old: String, new: String) {
+                println("name: $old -> $new")
+            }
+        },
+        object : Predicate {
+            override fun test(value: String): Boolean {
+                return value.length >= 5
+            }
         }
-    })
+    )
 }
-
 
 fun main() {
     val user = User()
