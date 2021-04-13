@@ -55,18 +55,58 @@ fun main() {
 
 // 2. 프로퍼티의 값의 변경에 따라 수행되는 로직을 캡슐화하는 목적 - Delegates.observable
 //    - KVO(Key-Value Observation)
-
 class TextView {
-    var text: String by Delegates.observable("") { property: KProperty<*>, oldValue: String, newValue: String ->
+    var text: String by Delegates.observable("") { _: KProperty<*>, oldValue: String, newValue: String ->
         println("$oldValue -> $newValue")
     }
 }
 
+/*
 fun main() {
     val tv = TextView()
     tv.text = "Tom"
     tv.text = "Bob"
 }
+*/
+
+// 3. 조건에 부합되지 않는다면, 값이 변경되지 않도록 하고 싶다. - Delegates.vetoable
+class Person {
+    var name: String by Delegates.vetoable("Alice") { _, _, newValue ->
+        newValue.length >= 3
+    }
+}
+
+/*
+fun main() {
+    val person = Person()
+    person.name = "A"
+
+    println(person.name)
+}
+*/
+
+
+/*
+{ "x": 10, "y": 20 }
+*/
+
+class Point(json: Map<String, Any>) {
+    val x: Int by json
+    val y: Int by json
+}
+
+fun main() {
+    val json = mapOf(
+        "x" to 10,
+        "y" to 20
+    )
+
+    val point = Point(json)
+    println(point.x)
+    println(point.y)
+}
+
+
 
 
 
