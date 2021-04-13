@@ -3,7 +3,7 @@ package ex12_2
 import java.time.LocalDateTime
 
 open class View {
-    // open fun click() = println("View click")
+     open fun click() = println("View click2222")
 }
 fun View.click() = println("View click")
 
@@ -18,8 +18,10 @@ fun main() {
 
     // Dynamic Binding: 참조하고 있는 객체의 타입에 기반해서 함수를 호출하는 것
     //--------------
-    // 확장 함수는 Static binding 기반으로 동작합니다.
-    // 참조 타입을 기반으로 함수를 호출한다.
+    // 주의사항
+    // 1. 확장 함수는 Static binding 기반으로 동작합니다.
+    //    참조 타입을 기반으로 함수를 호출한다.
+    // 2. 기존에 존재하는 메소드가 있다면, 확장함수는 절대 호출되지 않습니다.
     view.click()
 }
 
