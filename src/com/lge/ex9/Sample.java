@@ -69,6 +69,8 @@ class Cursor {
 }
 */
 
+import java.lang.reflect.Constructor;
+
 // Version 3
 //  - IODH(Initialization on Demand Holder)
 //  1) static final 필드에 대해서는 스레드 안전하게 초기화된다. - JLS
@@ -86,6 +88,7 @@ class Cursor {
     }
 }
 
+/*
 public class Sample {
     public static void main(String[] args) {
         Cursor c1 = Cursor.getInstance();
@@ -95,3 +98,104 @@ public class Sample {
         System.out.println(c2);
     }
 }
+*/
+
+// 모든 클래스는 클래스의 내부 정보를 담고 있는 클래스가 있습니다.
+//  => 클래스의 클래스
+//  => 리플렉션(Reflection) / Introspection / Mirror
+
+// com.lge.ex9.Point
+class Point {
+}
+
+class Rect extends Point {
+    void print() {
+        System.out.println("Rect print");
+    }
+}
+
+class User {
+    private User() {
+
+    }
+}
+
+public class Sample {
+    static void foo(Point p) {
+        // p가 Rect 타입이면 print 메소드를 사용하고 싶다.
+        if (p.getClass() == Rect.class) {
+            Rect r = (Rect) p;
+            r.print();
+        } else {
+            System.out.println("Rect 타입이 아닙니다.");
+        }
+    }
+
+    /*
+        // Reflection
+        //  1. 타입 체크
+        //  2. 동적 생성 - 런타임에 특정한 타입의 객체를 생성하는 기법
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    */
+    static Object newInstance(Class clazz) {
+        try {
+            return clazz.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        // User user = new User();
+        Class clazz = User.class;
+
+        Constructor c = clazz.getDeclaredConstructor();
+        c.setAccessible(true);
+        User user = (User) c.newInstance();
+
+        // User user = (User)clazz.newInstance();
+        System.out.println(user);
+
+
+        Point obj = new Point();
+
+        // class를 얻는 방법 3가지
+        // 1) 클래스 타입
+        Class clazz1 = Point.class;
+
+        // 2) 객체
+        clazz1 = obj.getClass();
+
+        // 3) 문자열
+        clazz1 = Class.forName("com.lge.ex9.Point");
+
+
+        // 활용
+        // 1) 타입 체크 목적으로 사용합니다.
+        foo(new Point());
+        foo(new Rect());
+
+        // 2) 객체 생성(동적 생성)
+        /*
+        Point p2 = (Point) clazz1.newInstance();
+        System.out.println(p2);
+
+        Point p3 = (Point)newInstance(Point.class);
+        System.out.println(p3);
+
+        Rect r = (Rect)newInstance(Rect.class);
+        System.out.println(r);
+        */
+    }
+}
+
+
+
+
+
+
+
+
+
