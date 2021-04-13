@@ -90,9 +90,21 @@ fun main() {
 { "x": 10, "y": 20 }
 */
 
+// 4. KVC(Key-Value Coding)
+//  : Map을 이용해서 프로퍼티의 값을 읽을 수 있습니다.
+
 class Point(json: Map<String, Any>) {
     val x: Int by json
     val y: Int by json
+
+    override fun toString(): String {
+        return "Point{x=$x, y=$y}"
+    }
+}
+
+class Player(json: Map<String, Any>) {
+    val name: String by json
+    val pos: Point by json
 }
 
 fun main() {
@@ -104,6 +116,15 @@ fun main() {
     val point = Point(json)
     println(point.x)
     println(point.y)
+
+    val json2 = mapOf(
+        "name" to "Tom",
+        "pos" to point,
+    )
+    val player = Player(json2)
+    println(player.name)
+    println(player.pos)
+
 }
 
 
