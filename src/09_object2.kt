@@ -1,6 +1,8 @@
 // 09_object2.kt
 package ex9_2
 
+import java.time.LocalDateTime
+
 //  2) companion object(동반 객체)
 //  => 코틀린에서는 static 키워드를 제공하지 않습니다.
 //     "정적 메소드 / 정적 프로퍼티" 를 구현하기 위해서는 동반 객체를 이용해야 합니다.
@@ -42,10 +44,17 @@ class User private constructor(val nickname: String) {
     }
 }
 
+// Java8 - LocalDateTime / LocalDate
+
 fun main() {
+    val now = LocalDateTime.now()
+    println(now)
+
+    // val user1 = User("hello@gmail.com")
     val user1 = User.newSubscribingUser("hello@gmail.com")
     println(user1.nickname)
 
+    // val user2 = User("1231375848120ddx")
     val user2 = User.newFacebookUser("1231375848120ddx")
     println(user2.nickname)
 }
