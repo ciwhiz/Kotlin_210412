@@ -31,7 +31,7 @@ fun main() {
 //     "생성자 한계"
 //     1) 이름이 클래스 이름과 동일하다. - 의도를 표현하기 어렵다.
 //     2) 객체 생성의 정책을 변경하기 어렵다.
-
+/*
 class User private constructor(val nickname: String) {
     companion object {
         fun newSubscribingUser(email: String): User {
@@ -45,7 +45,6 @@ class User private constructor(val nickname: String) {
 }
 
 // Java8 - LocalDateTime / LocalDate
-
 fun main() {
     val now = LocalDateTime.now()
     println(now)
@@ -58,6 +57,61 @@ fun main() {
     val user2 = User.newFacebookUser("1231375848120ddx")
     println(user2.nickname)
 }
+*/
+
+// 활용 2. Companion Object는 상속 이나 인터페이스를 구현하는 것이 가능합니다.
+
+// Map<String, Any> = JSON
+// {
+//   "name": "Tom",
+//   "age": 42
+// }
+
+interface MapFactory<T> {
+    fun fromMap(map: Map<String, Any>): T
+}
+
+data class Person(val name: String, val age: Int) {
+    companion object : MapFactory<Person> {
+        override fun fromMap(map: Map<String, Any>): Person {
+            val name = map["name"] as String
+            val age = map["age"] as Int
+            return Person(name, age)
+        }
+    }
+}
+
+data class User(val name: String) {
+    companion object : MapFactory<User> {
+        override fun fromMap(map: Map<String, Any>): User {
+            val name = map["name"] as String
+            return User(name)
+        }
+    }
+}
+
+
+fun <T> loadFromMap(json: Map<String, Any>, factory: MapFactory<T>): T {
+    return factory.fromMap(json)
+}
+
+fun main() {
+    val json = mapOf(
+        "name" to "Tom",
+        "age" to 42
+    )
+
+    val person = loadFromMap(json, Person)
+    println(person)
+
+    val user = loadFromMap(json, User)
+    println(user)
+
+    // val person = Person.fromMap(json)
+    // println(person)
+}
+
+
 
 
 
