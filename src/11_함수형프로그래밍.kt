@@ -43,7 +43,7 @@ fun goo(a: Int, b: Double, c: Float) {}
 fun main() {
     val fn3: (Int, Double, Float) -> Unit = ::goo
     fn3(42, 3.14, 3.14f)
-    
+
     val fn2: (Char, Double) -> String = ::foo
     fn2('A', 3.14)
 
@@ -51,7 +51,25 @@ fun main() {
     fn = ::add2
 
     fn(10, 20)
+}
 
+// 3. 지역 함수
+//  => 클로저를 지원합니다.
+//     외부의 변수에 '암묵적인' 참조가 가능하다.
+fun printArea(width: Int, height: Int): Int {
+
+    // val area1 = width * height
+    // val area2 = width * height
+
+    // fun calcArea(width: Int, height: Int) = width * height
+    // val area1 = calcArea(width, height)
+    // val area2 = calcArea(width, height)
+
+    fun calcArea() = width * height
+    val area1 = calcArea()
+    val area2 = calcArea()
+
+    return area1 * area2
 }
 
 
