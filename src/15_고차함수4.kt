@@ -12,6 +12,7 @@ package ex15_4
 // () -> (String) -> String)
 //  : -> 오른쪽 결합을 합니다.
 
+/*
 fun foo(): (String) -> String {
     return { str ->
         str.reversed()
@@ -25,4 +26,32 @@ fun main() {
     val result2: String = result("hello")
     println(result2)
 }
+*/
+
+// (Int) -> Boolean
+// fun isOdd(e: Int) = e % 2 == 1
+
+// (Int) -> Boolean
+// fun isEven(e: Int) = e % 2 == 0
+
+// modulo의 함수를 통해 isOdd / isEven 실행시간에 생성해서 사용하고 싶다
+fun modulo(r: Int): (Int) -> Boolean {
+    return { e: Int ->
+        e % 2 == r
+    }
+}
+
+fun main() {
+    // 아래 코드를 완성해보세요
+    val isOdd = modulo()
+    val isEven = modulo()
+}
+
+
+
+
+
+
+
+
 
