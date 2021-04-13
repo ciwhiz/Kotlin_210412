@@ -1,15 +1,17 @@
 // 15_고차함수2.kt
 package ex15_2
 
+import java.util.function.Predicate
+
 // 변하지 않는 전체 알고리즘에서 변해야 하는 정책은 분리되어야 한다.
 //  => 공통성과 가변성의 분리
 //  => 함수에서 정책을 분리하는 2가지 방법
 //    1) Java - 동작 파라미터화 설계
 //       정책을 인터페이스 기반 클래스를 통해 분리한다.
 
-interface Predicate<E> {
-    fun test(e: E): Boolean
-}
+//interface Predicate<E> {
+//    fun test(e: E): Boolean
+//}
 
 fun filter(data: List<Int>, predicate: Predicate<Int>): List<Int> {
     val result = mutableListOf<Int>()
