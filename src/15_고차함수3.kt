@@ -55,8 +55,7 @@ fun main() {
 
     // 5. 람다 - 인자가 한개인 경우, it 키워드를 통해 인자를 참조할 수 있습니다.
     result = filter(list) { it % 2 == 1 }
-
-
+    
     println(result)
 }
 
