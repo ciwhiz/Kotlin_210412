@@ -45,14 +45,13 @@ class SampleDelegate<T>(
     }
 
     operator fun setValue(thisRef: User, property: KProperty<*>, newValue: T) {
-        val oldValue = field
-
         // val result = predicate?.test(newValue)
         val predicate = predicate
         if (predicate != null && predicate.test(newValue).not()) {
             return
         }
 
+        val oldValue = field
         field = newValue
         onValueChanged?.onChangedValue(oldValue, newValue)
     }
@@ -74,18 +73,44 @@ fun <T> observable(initialValue: T, onChange: (oldValue: T, newValue: T) -> Unit
 }
 */
 
+/*
 fun <T> observable(
     initialValue: T,
     onChange: (oldValue: T, newValue: T) -> Unit
 ): SampleDelegate<T> = SampleDelegate(initialValue, object : OnValueChanged<T> {
     override fun onChangedValue(old: T, new: T) = onChange(old, new)
 }, null)
+*/
+
+fun <T> observable(
+    initialValue: T,
+    onChange: (oldValue: T, newValue: T) -> Unit,
+    predicate: (T) -> Boolean,
+): SampleDelegate<T> = SampleDelegate(initialValue,
+    object : OnValueChanged<T> {
+        override fun onChangedValue(old: T, new: T) = onChange(old, new)
+    },
+    object : Predicate<T> {
+        override fun test(value: T): Boolean = predicate(value)
+    }
+)
 
 
 class User {
+    /*
     var name: String by observable("Alice") { old, new ->
         println("name: $old -> $new")
     }
+    */
+    // 함수가 두 개 이상의 함수를 전달 받을 경우, 파라미터 라벨 지정 방식 호출이 좋습니다.
+    var name: String by observable("Alice",
+        onChange = { old, new ->
+            println("name: $old -> $new")
+        },
+        predicate = { value ->
+            value.length >= 5
+        })
+
 
     // Backing Field 가 없는 프로퍼티
     /*
