@@ -95,7 +95,15 @@ fun <T> loadFromMap(json: Map<String, Any>, factory: MapFactory<T>): T {
     return factory.fromMap(json)
 }
 
+class Point {
+    companion object {
+        var name: String = "Point"
+    }
+}
+
 fun main() {
+    println(Point.name)
+
     val json = mapOf(
         "name" to "Tom",
         "age" to 42
@@ -110,6 +118,14 @@ fun main() {
     // val person = Person.fromMap(json)
     // println(person)
 }
+
+/*
+    // Reflection
+    //  1. 타입 체크
+    //  2. 동적 생성 - 런타임에 특정한 타입의 객체를 생성하는 기법
+    Intent intent = new Intent(this, MainActivity.class);
+    startActivity(intent);
+*/
 
 
 
