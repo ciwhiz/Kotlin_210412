@@ -15,13 +15,16 @@ class User {
 }
 
 fun main() {
-    val fn: (Int, Int) -> Unit = ::move
+    var fn: (Int, Int) -> Unit = ::move
 
     // fn = User::move  // ?
     val fn2: (User, Int, Int) -> Unit = User::move
 
+    fn(10, 20)
     val user = User()
-    user.move(10, 20) // User::move(user, 10, 20)
+    fn = user::move   // Bound reference - this의 객체가 이미 bind 되었다.
+    fn(10, 20)
 
+    user.move(10, 20) // User::move(user, 10, 20)
     fn2(user, 10, 20)
 }
