@@ -96,6 +96,8 @@ fun <T> loadFromMap(json: Map<String, Any>, factory: MapFactory<T>): T {
 }
 
 class Point {
+    // companion object에 이름을 부여하는 것은 자바에서 접근할때의 이름입니다.
+    // companion object Hello {
     companion object {
         var name: String = "Point"
     }

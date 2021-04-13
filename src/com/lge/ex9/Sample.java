@@ -148,6 +148,9 @@ public class Sample {
     }
 
     public static void main(String[] args) throws Exception {
+        // ex9_2.Point.Hello.getName();
+        ex9_2.Point.Companion.getName();
+
         // User user = new User();
         Class clazz = User.class;
 
