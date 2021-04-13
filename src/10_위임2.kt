@@ -66,11 +66,20 @@ fun <T> observable(initialValue: T, onChange: (property: KProperty<*>, oldValue:
 }
 */
 
+/*
 fun <T> observable(initialValue: T, onChange: (oldValue: T, newValue: T) -> Unit): SampleDelegate<T> {
     return SampleDelegate(initialValue, object : OnValueChanged<T> {
         override fun onChangedValue(old: T, new: T) = onChange(old, new)
     }, null)
 }
+*/
+
+fun <T> observable(
+    initialValue: T,
+    onChange: (oldValue: T, newValue: T) -> Unit
+): SampleDelegate<T> = SampleDelegate(initialValue, object : OnValueChanged<T> {
+    override fun onChangedValue(old: T, new: T) = onChange(old, new)
+}, null)
 
 
 class User {
