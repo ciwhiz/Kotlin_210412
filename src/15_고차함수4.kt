@@ -35,16 +35,25 @@ fun main() {
 // fun isEven(e: Int) = e % 2 == 0
 
 // modulo의 함수를 통해 isOdd / isEven 실행시간에 생성해서 사용하고 싶다
-fun modulo(r: Int): (Int) -> Boolean {
+fun modulo(k: Int, r: Int): (Int) -> Boolean {
     return { e: Int ->
-        e % 2 == r
+        e % k == r
     }
 }
 
 fun main() {
     // 아래 코드를 완성해보세요
-    val isOdd = modulo()
-    val isEven = modulo()
+    // val isOdd = modulo(2, 1)
+    // val isEven = modulo(2, 0)
+
+    val list = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    // val result = list.filter(isOdd)
+
+    val result1 = list.filter(modulo(2, 1))
+    println(result1)
+
+    val result2 = list.filter(modulo(2, 0))
+    println(result2)
 }
 
 
