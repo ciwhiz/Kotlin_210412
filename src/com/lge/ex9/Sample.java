@@ -120,6 +120,18 @@ class User {
     }
 }
 
+interface OnClickListener {
+    void onClick();
+}
+
+class Button {
+    private OnClickListener listener;
+
+    void setOnClickListener(OnClickListener listener) {
+        this.listener = listener;
+    }
+}
+
 public class Sample {
     static void foo(Point p) {
         // p가 Rect 타입이면 print 메소드를 사용하고 싶다.
@@ -148,6 +160,24 @@ public class Sample {
     }
 
     public static void main(String[] args) throws Exception {
+        Button button = new Button();
+
+        int n = 100;
+        button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick() {
+                // n에 대한 접근이 가능합니다. - 클로저
+                // - Java 7까지는 final 접근이 가능합니다.
+                // - Java 8부터는 일반 접근이 가능합니다.
+                System.out.println(n);
+
+                // final로 취급됩니다.
+                // n = 200;
+            }
+        });
+
+
+
         // ex9_2.Point.Hello.getName();
         ex9_2.Point.Companion.getName();
 

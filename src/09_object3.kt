@@ -49,9 +49,10 @@ class Window {
 
 fun main() {
     val window = Window()
+    var n = 0
     window.adapter = object : MouseAdapter {
         override fun mouseClicked() {
-            println("mouseClicked")
+            println("mouseClicked - ${++n}")
         }
 
         override fun mouseEntered() {
@@ -59,6 +60,8 @@ fun main() {
         }
     }
 
+    window.click()
+    window.click()
     window.click()
     window.enter()
 }
