@@ -28,6 +28,16 @@ public class Sample {
                 return integer % 2 == 0;
             }
         });
+        for (Integer e : result) {
+            System.out.println(e);
+        }
+ 
+        result = filter(list, new Predicate<Integer>() {
+            @Override
+            public boolean test(Integer integer) {
+                return integer % 2 == 1;
+            }
+        });
 
         for (Integer e : result) {
             System.out.println(e);
