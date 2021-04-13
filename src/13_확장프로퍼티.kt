@@ -10,13 +10,20 @@ fun String.lastChar(): Char = this[length - 1]
 
 // getter + setter: var
 // getter         : val
-
 val String.lastChar: Char
     get() = this[length - 1]
 
+// StringBuilder가 외부에 공개하는 프로퍼티와 메소드만 사용 가능합니다.
+var StringBuilder.lastChar: Char
+    get() = this[length - 1]
+    set(value) = setCharAt(length - 1, value)
+
 fun main() {
     // val r = "hello".lastChar()
-
     val r = "hello".lastChar
     println(r)
+
+    val sb = StringBuilder("hello")
+    sb.lastChar = 'x'
+    println(sb.toString())
 }
