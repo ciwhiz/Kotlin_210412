@@ -1,6 +1,8 @@
 // 20_Nullable.kt
 package ex20
 
+import ex4.add
+
 // Nullable
 //  : 'null'을 안전하게 다루는 방법
 
@@ -9,9 +11,40 @@ class User {
         println("User sendMail - $email")
     }
 
+    // 함수가 Nullable이 아닌 값을 가지도록 만드는 것이 편리합니다.
     fun sendMail(email: String, address: String) {
-
     }
+
+    fun sendMail2(email: String?, address: String?) {
+        /*
+        email?.let { email ->
+            address?.let { address ->
+                sendMail(email, address)
+            }
+        }
+        */
+
+        /*
+        if (email == null || address == null)
+            return
+        sendMail(email, address)
+        */
+
+        // 코틀린 삼항 연산자가 제공되지 않습니다.
+        /*
+        val email = if (email == null)
+            "default@gmail.com"
+        else
+            email
+        */
+
+        // ?: - null일 경우 기본값을 제공할 수 있습니다.
+        //      Elvis Operator
+        val email: String = email ?: "default@gmail.com"
+        val address = address ?: "Seoul"
+        sendMail(email, address)
+    }
+
 }
 
 fun getUser(): User? {
@@ -72,8 +105,6 @@ fun main() {
     if (email != null && address != null) {
         user.sendMail(email, address)
     }
-
-
 }
 
 /*
