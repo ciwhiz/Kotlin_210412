@@ -122,6 +122,8 @@ fun compute(logger: ((String) -> Unit)? = null) {
 fun main() {
     log(Level.INFO, System.out, "main 시작")
 
+    compute()
+
     // 1. 람다 표현식
     compute { message ->
         log(Level.INFO, System.out, message)
