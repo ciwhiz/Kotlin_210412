@@ -43,8 +43,11 @@ fun main() {
     println(userToJSON(user2))
     println(userToJSON(user))
 
-
-    // val car = Car("Sonata", 255, 100)
+    val carToJSON = Any::toJSON.memoized()
+    val car = Car("Sonata", 255, 100)
+    println(carToJSON(car))
+    println(carToJSON(car))
+    println(carToJSON(car))
     // println(car.toJSON())
 
 }
