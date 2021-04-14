@@ -4,7 +4,7 @@ package ex22
 import java.io.Closeable
 
 // 코틀린은 Try with resources 문법을 지원하지 않습니다.
-class Resource : AutoCloseable {
+class Resource : Closeable {
     override fun close() {
         println("Resource close")
     }
