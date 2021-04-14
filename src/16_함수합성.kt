@@ -19,6 +19,7 @@ fun main() {
 }
 */
 
+/*
 fun compose(f: (String) -> Int, g: (Any) -> Int): (String) -> Int {
     return { x ->
         val y = f(x)
@@ -26,11 +27,39 @@ fun compose(f: (String) -> Int, g: (Any) -> Int): (String) -> Int {
         z
     }
 }
+*/
+
+/*
+fun compose(f: (String) -> Int, g: (Any) -> Int): (String) -> Int = { x ->
+    g(f(x))
+}
 
 fun main() {
     val f: (String) -> Int = String::length
     val g: (Any) -> Int = Any::hashCode
 
     val h = compose(f, g)
+    println(h("hello"))
+}
+*/
+
+// 1. 일반화
+/*
+fun <A, B, C> compose(f: (A) -> B, g: (B) -> C): (A) -> C = { x ->
+    g(f(x))
+}
+*/
+// 2. 확장 함수
+fun <A, B, C> ((A) -> B).compose(g: (B) -> C): (A) -> C = { x ->
+    g(this(x))
+}
+
+fun main() {
+    val f: (String) -> Int = String::length
+    val g: (Any) -> Int = Any::hashCode
+
+    // val h = compose(f, g)
+
+    val h = f.compose(g)
     println(h("hello"))
 }
