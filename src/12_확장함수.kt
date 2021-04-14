@@ -18,21 +18,21 @@ class User {
 /*
 fun main() {
     var fn: (Int, Int) -> Unit = ::move
-
-    // fn = User::move  // ?
-    val fn2: (User, Int, Int) -> Unit = User::move
-
     fn(10, 20)
+
     val user = User()
+    user.move(10, 20) // User::move(user, 10, 20)
+
+    // fn = User::move  // compile error!
+    val fn2: (User, Int, Int) -> Unit = User::move
+    fn2(user, 10, 20)
+
     fn = user::move   // Bound reference - this의 객체가 이미 bind 되었다.
     fn(10, 20)
 
     val obj = User()
     fn = obj::move
     fn(20, 30)
-
-    // user.move(10, 20) // User::move(user, 10, 20)
-    // fn2(user, 10, 20)
 }
 */
 
