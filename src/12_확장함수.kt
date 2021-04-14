@@ -10,6 +10,9 @@ fun move(x: Int, y: Int) {
 
 class User {
     // fun move(this: User, x: Int, y: Int)
+
+    // Kotlin: (User, Int, Int) -> Unit
+    //  Swift: (User) -> (Int, Int) -> Unit
     fun move(x: Int, y: Int) {
         println("User move - $this")
     }
