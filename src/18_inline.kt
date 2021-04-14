@@ -65,7 +65,6 @@ class IncThread(val lock: Lock) : Thread() {
     }
 
 
-
     /*
     override fun run() {
         for (i in 1..1_000_000) {
