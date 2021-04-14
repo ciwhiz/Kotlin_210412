@@ -21,6 +21,7 @@ fun sum(x: Int, y: Int, z: Int) = x + y + z
 fun sum(x: Int)(y: Int)(z: Int) = x + y + z
 */
 
+/*
 fun sum2(x: Int, y: Int): Int = x + y
 
 fun sum2(x: Int): (y: Int) -> Int = { y: Int ->
@@ -38,6 +39,17 @@ fun main() {
 
     println(sum10(20))  // 30
     println(sum10(30))  // 40
+}
+*/
+
+fun sum3(x: Int, y: Int, z: Int): Int = x + y + z
+
+
+
+
+
+fun main() {
+    println(sum3(10, 20, 30))
 }
 
 
