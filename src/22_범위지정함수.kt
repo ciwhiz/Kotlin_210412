@@ -51,8 +51,50 @@ fun alphabet(): String = StringBuilder().apply {
 //    return toString()
 //}
 
+interface OnClickListener {
+    fun onClick()
+}
+
+class TextView {
+    var text: String? = null
+}
+
+class Button {
+    var onClickListener: OnClickListener? = null
+}
+
+class ViewHolder {
+    var view = View()
+}
+
+class View {
+    val nameTextView: TextView = TextView()
+    val emailTextView: TextView = TextView()
+    val loginButton: Button = Button()
+}
+
 
 fun main() {
+    val holder = ViewHolder()
+    holder.view.nameTextView.text = "Tom"
+    holder.view.emailTextView.text = "hello@gmail.com"
+    holder.view.loginButton.onClickListener = object : OnClickListener {
+        override fun onClick() {
+            // ...
+        }
+    }
+
+    with(holder.view) {
+        nameTextView.text = "Tom"
+        emailTextView.text = "hello@gmail.com"
+        loginButton.onClickListener = object : OnClickListener {
+            override fun onClick() {
+                // ...
+            }
+        }
+    }
+
+
     val result = alphabet()
     println(result)
 }
