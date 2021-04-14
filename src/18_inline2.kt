@@ -26,11 +26,13 @@ fun print(element: String) {
 */
 
 /*
-   List<String> list = new ArrayList<>();
+// Java
+   List<String> list = new ArrayList<String>();
    list.add("hello");
    list.add("world");
    list.add(42);        // compile error!
 
+// ByteCode
    List list = new ArrayList();
    list.add("hello");
    list.add("world");
@@ -75,6 +77,8 @@ inline fun <reified T : Activity> startActivity() {
 }
 
 fun main() {
+    // ArrayList()
+
     val intent = Intent(null, MainActivity::class.java)
     startActivity(intent)
 
