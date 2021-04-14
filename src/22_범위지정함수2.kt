@@ -15,7 +15,11 @@ class Resource : AutoCloseable {
 // use - AutoClosable
 fun main() {
     val res = Resource()
-    res.use { e ->
-        e.foo()
+    val res2 = Resource()
+
+    res2.use {
+        res.use { e ->
+            e.foo()
+        }
     }
 }
