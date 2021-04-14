@@ -40,9 +40,9 @@ class User {
 
         // ?: - null일 경우 기본값을 제공할 수 있습니다.
         //      Elvis Operator
-        val email: String = email ?: "default@gmail.com"
-        val address = address ?: "Seoul"
-        sendMail(email, address)
+        val email1: String = email ?: "default@gmail.com"
+        val address1 = address ?: "Seoul"
+        sendMail(email1, address1)
     }
 
 }
