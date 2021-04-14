@@ -8,6 +8,10 @@ class User {
     fun sendMail(email: String) {
         println("User sendMail - $email")
     }
+
+    fun sendMail(email: String, address: String) {
+
+    }
 }
 
 fun getUser(): User? {
@@ -15,6 +19,7 @@ fun getUser(): User? {
 }
 
 var email: String? = null
+var address: String? = null
 
 fun main() {
     /*
@@ -54,6 +59,20 @@ fun main() {
     email?.let { email ->
         user.sendMail(email)
     }
+
+    // let은 중첩될 경우 코드의 가독성이 떨어집니다.
+    email?.let { email ->
+        address?.let { address ->
+            user.sendMail(email, address)
+        }
+    }
+
+    val email = email
+    val address = address
+    if (email != null && address != null) {
+        user.sendMail(email, address)
+    }
+
 
 }
 
