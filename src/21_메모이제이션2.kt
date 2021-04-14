@@ -25,6 +25,8 @@ fun <T> T.toJSON(): String {
 // 기존 함수에 '메모이제이션'의 기능을 추가하는 함수 - "고차함수"
 //  Map<K, V>
 //   K: equals / hashCode
+
+// 재귀적인 코드에 대해서는 제대로 동작하지 않습니다.
 fun <A, B> ((A) -> B).memoized(): (A) -> B {
     val cache = mutableMapOf<A, B>()
     return { k ->
