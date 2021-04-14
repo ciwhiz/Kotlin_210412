@@ -1,5 +1,8 @@
 package ex17
 
+import java.lang.Appendable
+import java.time.LocalDateTime
+
 // 커링(Currying)
 //  : 다중 인수를 갖는 함수를 단일 인수를 갖는 함수들의 함수열로 바꾸는 작업
 // 용도
@@ -66,6 +69,23 @@ fun sum3(x: Int, y: Int, z: Int): Int = x + y + z
 fun sum2(x: Int, y: Int): Int = x + y
 // 커링 버전의 함수를 생성하는 함수를 만들어봅시다.
 
+/*
+fun main() {
+    val csum3 = ::sum3.curried()
+    val sum_10_20 = csum3(10)(20)
+    println(sum_10_20(30))  // 60
+    println(sum_10_20(40))  // 70
+
+    val csum = ::sum2.curried()
+    val result = csum(10)(20)
+    println(result)
+
+    val sum10 = csum(10)
+    println(sum10(20))  // 30
+    println(sum10(30))  // 40
+}
+*/
+
 fun <P1, P2, R> ((P1, P2) -> R).curried(): (P1) -> (P2) -> R = { p1 ->
     { p2 ->
         this(p1, p2)
@@ -80,19 +100,17 @@ fun <P1, P2, P3, R> ((P1, P2, P3) -> R).curried(): (P1) -> (P2) -> (P3) -> R = {
     }
 }
 
+enum class Level {
+    INFO, WARN, ERROR
+}
+
+// 로깅 라이브러리
+fun log(level: Level, appendable: Appendable, message: String) {
+    appendable.appendLine("[${level.name}][${LocalDateTime.now()}]: $message")
+}
+
 fun main() {
-    val csum3 = ::sum3.curried()
-    val sum_10_20 = csum3(10)(20)
-    println(sum_10_20(30))  // 60
-    println(sum_10_20(40))  // 70
-
-    val csum = ::sum2.curried()
-    val result = csum(10)(20)
-    println(result)
-
-    val sum10 = csum(10)
-    println(sum10(20))  // 30
-    println(sum10(30))  // 40
+    log(Level.INFO, System.out, "main 시작")
 }
 
 
