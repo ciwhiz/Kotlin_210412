@@ -1,6 +1,8 @@
 // 22_범위지정함수2.kt
 package ex22
 
+import java.io.Closeable
+
 // 코틀린은 Try with resources 문법을 지원하지 않습니다.
 class Resource : AutoCloseable {
     override fun close() {
@@ -12,7 +14,7 @@ class Resource : AutoCloseable {
     }
 }
 
-// use - AutoClosable
+// use - AutoClosable / Closeable
 fun main() {
     val res = Resource()
     val res2 = Resource()
