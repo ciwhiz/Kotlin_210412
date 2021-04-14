@@ -79,6 +79,7 @@ inline fun <reified T : Activity> startActivity() {
 fun main() {
     // ArrayList()
 
+    // Class를 기반으로 새로운 객체를 생성하고 싶다.
     val intent = Intent(null, MainActivity::class.java)
     startActivity(intent)
 
