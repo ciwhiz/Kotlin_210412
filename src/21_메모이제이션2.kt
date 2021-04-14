@@ -2,6 +2,7 @@
 package ex21_2
 
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import kotlin.random.Random
 
 
@@ -111,6 +112,20 @@ fun <T> toJSON2(user: T): String {
 }
 
 fun main() {
+    val gson = GsonBuilder()
+        .setPrettyPrinting()
+        .disableHtmlEscaping()
+        .enableComplexMapKeySerialization()
+        .create()
+
+    // Kotlin-Style
+    val gson2 = GsonBuilder().apply {
+        setPrettyPrinting()
+        disableHtmlEscaping()
+        enableComplexMapKeySerialization()
+    }.create()
+
+
     val fn: (Any) -> String = ::toJSON2
     val mfn = fn.memoized()
 
