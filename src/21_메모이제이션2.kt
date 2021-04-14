@@ -15,6 +15,9 @@ fun <T> T.toJSON(): String {
     return gson.toJson(this)
 }
 
+// Design Pattern - Flyweight Pattern
+//  의도: 속성이 동일한 객체는 공유하자.
+
 // 기존 함수에 메모이제이션의 기능을 추가하는 함수 - "고차함수"
 fun <A, B> ((A) -> B).memoized(): (A) -> B {
     val cache = mutableMapOf<A, B>()
