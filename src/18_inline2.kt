@@ -36,11 +36,13 @@ fun print(element: String) {
    list.add("world");
 */
 
+/*
 fun main() {
     // print<String>(42)      // T = Int
     print(3.14)    // T = Double
     print("Hello") // T = String
 }
+*/
 
 
 // Generic - 타입에 일반적인 알고리즘을 가지는 함수와 클래스를 만들 수 있습니다
@@ -55,3 +57,33 @@ fun main() {
 //   단점 - 타입 체크 목적으로만 사용할 수 있습니다.
 //   = 코드를 생성하지 않습니다.
 //     Generic 타입을 타입 체크 목적으로 사용합니다.
+
+
+// Intent = Intent(this, MainActivity.class)
+// startActivity(intent)
+
+open class Activity
+class MainActivity : Activity()
+class Intent(context: Any?, clazz: Class<out Activity>)
+
+fun startActivity(intent: Intent) {}
+
+inline fun <reified T : Activity> startActivity() {
+    // 바이트 코드 안에서 T의 타입 정보를 알 수 없다.
+    val intent = Intent(null, T::class.java)
+    startActivity(intent)
+}
+
+fun main() {
+    val intent = Intent(null, MainActivity::class.java)
+    startActivity(intent)
+
+    startActivity<MainActivity>()
+}
+
+
+
+
+
+
+
