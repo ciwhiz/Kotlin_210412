@@ -34,12 +34,22 @@ fun main() {
 }
 */
 
+/*
 fun <T> withLock(lock: Lock, action: () -> T): T {
     lock.lock()
     try {
         return action()
     } finally {
         lock.unlock()
+    }
+}
+*/
+fun <T> Lock.withLock(action: () -> T): T {
+    lock()
+    try {
+        return action()
+    } finally {
+        unlock()
     }
 }
 
@@ -50,11 +60,21 @@ class IncThread(val lock: Lock) : Thread() {
 
     override fun run() {
         for (i in 1..1_000_000) {
+            lock.withLock {
+                n += 1
+            }
+        }
+    }
+
+    /*
+    override fun run() {
+        for (i in 1..1_000_000) {
             withLock(lock) {
                 n += 1
             }
         }
     }
+    */
 
     /*
     override fun run() {
