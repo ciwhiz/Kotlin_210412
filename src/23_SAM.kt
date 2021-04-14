@@ -1,6 +1,8 @@
 // 23_SAM
 package ex23
 
+import com.lge.ex23.Car
+
 // import com.lge.ex23.OnClickListener
 
 // Kotlin - 1.4
@@ -35,6 +37,32 @@ class Activity {
 
 }
 
-fun main() {
 
+/*
+String  - @NotNull
+String? - @Nullable
+
+String! - Java's Type
+*/
+
+
+fun main() {
+    val car = Car()
+
+    // car.name = "Bob"
+    // println(car.name)
+
+    // - Getter가 제공되지 않으면, 위의 표현을 사용할 수 없습니다.
+    // car.setName("Bob")
+
+
+    println(car.name)
 }
+
+
+
+
+
+
+
+
