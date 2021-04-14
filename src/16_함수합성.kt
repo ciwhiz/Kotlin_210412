@@ -49,8 +49,8 @@ fun <A, B, C> compose(f: (A) -> B, g: (B) -> C): (A) -> C = { x ->
     g(f(x))
 }
 */
-// 2. 확장 함수
-fun <A, B, C> ((A) -> B).compose(g: (B) -> C): (A) -> C = { x ->
+// 2. 확장 함수 + 중위 함수
+infix fun <A, B, C> ((A) -> B).compose(g: (B) -> C): (A) -> C = { x ->
     g(this(x))
 }
 
@@ -60,6 +60,7 @@ fun main() {
 
     // val h = compose(f, g)
 
-    val h = f.compose(g)
+    // val h = f.compose(g)
+    val h = f compose g
     println(h("hello"))
 }
