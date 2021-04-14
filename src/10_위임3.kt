@@ -29,6 +29,7 @@ class User {
     // lateinit var age: Int
     //  => 참조 타입에 대해서만 사용할 수 있습니다.
     //    - Int, Double, Long, Float
+    //  => 주의해서 사용해야 합니다.
 
     // val heavyObject = HeavyObject()
     val heavyObject: HeavyObject by lazy {
