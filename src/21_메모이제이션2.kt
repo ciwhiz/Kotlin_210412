@@ -17,6 +17,7 @@ fun <T> T.toJSON(): String {
     return gson.toJson(this)
 }
 
+
 // Design Pattern - Flyweight Pattern
 //  의도: 속성이 동일한 객체는 공유하자.
 //    - '불변 객체' 를 대상으로 사용해야 한다.
@@ -48,11 +49,11 @@ fun goo(n: Int): Int {
     return random.nextInt()
 }
 
+/*
 fun main() {
     println(goo(10))
     println(goo(10))
     println(goo(10))
-
 
     // foo(10)
     // foo(10)
@@ -83,7 +84,7 @@ fun main() {
     // println(car.toJSON())
 
 }
-
+*/
 
 // Gson(Google JSON Serialization library)
 /*
@@ -99,3 +100,20 @@ fun main() {
     println(json)
 }
 */
+
+// Any -> String
+fun <T> toJSON2(user: T): String {
+    println("toJSON()")
+    val gson = Gson()
+    return gson.toJson(user)
+}
+
+fun main() {
+    val fn: (Any) -> String = ::toJSON2
+    val mfn = fn.memoized()
+
+    val user = User("Tom", 42)
+    mfn(user)
+    mfn(user)
+    mfn(user)
+}
