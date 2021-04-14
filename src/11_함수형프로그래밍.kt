@@ -6,8 +6,8 @@ package ex11
 
 // * 함수형 언어
 // 1) 함수를 변수에 담을 수 있어야 한다.
-// 2) 함수를 인자로 전달할 수 있어야 한다.
-// 3) 함수를 반환할 수 있어야 한다.
+// 2) 함수를 인자로 전달할 수 있어야 한다. => 고차 함수
+// 3) 함수를 반환할 수 있어야 한다.      => 고차 함수
 // 4) 실행 시간에 함수를 생성할 수 있어야 한다.
 // 5) 함수를 익명으로 생성할 수 있어야 한다.
 // => 함수를 '일급 시민(First class citizen)'으로 취급한다.
@@ -40,6 +40,7 @@ fun foo(a: Char, b: Double): String = ""
 // (Int, Double, Float) -> Unit
 fun goo(a: Int, b: Double, c: Float) {}
 
+/*
 fun main() {
     // 명시적인 타입 지정
     // val fn3: (Int, Double, Float) -> Unit = ::goo
@@ -56,6 +57,7 @@ fun main() {
 
     fn(10, 20)
 }
+*/
 
 // 3. 지역 함수
 //  => 클로저를 지원합니다.
@@ -69,13 +71,26 @@ fun printArea(width: Int, height: Int): Int {
     // val area1 = calcArea(width, height)
     // val area2 = calcArea(width, height)
 
-    fun calcArea() = width * height
+    // fun calcArea() = width * height
+    /*
+    fun calcArea(): Int {
+        return width * height
+    }
+    */
+
+    val calcArea: () -> Int = {
+        width * height
+    }
+
     val area1 = calcArea()
     val area2 = calcArea()
 
     return area1 * area2
 }
 
+fun main() {
+    println(printArea(10, 10))
+}
 
 
 
