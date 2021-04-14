@@ -142,7 +142,8 @@ fun main() {
         car.go()
     }
 
-
+    val s: Int? = null
+    // s!!.toString()
 
     val country: Country? = Country("KR", City("Seoul", Address("Gangnam")))
     if (country != null) {
