@@ -42,14 +42,39 @@ fun main() {
 }
 */
 
+/*
 fun sum3(x: Int, y: Int, z: Int): Int = x + y + z
 
-
-
-
+fun sum3(x: Int): (y: Int) -> (z: Int) -> Int = { y: Int ->
+    { z ->
+        x + y + z
+    }
+}
 
 fun main() {
-    println(sum3(10, 20, 30))
+    // println(sum3(10, 20, 30))
+    // val result = sum3(10)(20)(30)
+
+    val sum_10_20 = sum3(10)(20)
+
+    println(sum_10_20(40)) // 70
+    println(sum_10_20(10)) // 40
+}
+*/
+
+fun sum2(x: Int, y: Int): Int = x + y
+// 커링 버전의 함수를 생성하는 함수를 만들어봅시다.
+
+fun <P1, P2, R> ((P1, P2) -> R).curried(): (P1) -> (P2) -> R = { p1 ->
+    { p2 ->
+        this(p1, p2)
+    }
+}
+
+fun main() {
+    val csum = ::sum2.curried()
+    val result = csum(10)(20)
+    println(result)
 }
 
 
