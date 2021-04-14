@@ -44,7 +44,10 @@ fun <T> withLock(lock: Lock, action: () -> T): T {
     }
 }
 */
-fun <T> Lock.withLock(action: () -> T): T {
+
+// inline: 함수를 호출하는 것이 아니라 바이트 코드로 치환하는 기술
+//   - 함수를 인자로 받는 고차 함수에서만 사용할 수 있습니다.
+inline fun <T> Lock.withLock(action: () -> T): T {
     lock()
     try {
         return action()
@@ -58,13 +61,7 @@ class IncThread(val lock: Lock) : Thread() {
         var n: Int = 0
     }
 
-    override fun run() {
-        for (i in 1..1_000_000) {
-            lock.withLock {
-                n += 1
-            }
-        }
-    }
+
 
     /*
     override fun run() {
@@ -75,6 +72,14 @@ class IncThread(val lock: Lock) : Thread() {
         }
     }
     */
+
+    override fun run() {
+        for (i in 1..1_000_000) {
+            lock.withLock {
+                n += 1
+            }
+        }
+    }
 
     /*
     override fun run() {
