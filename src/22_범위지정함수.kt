@@ -53,6 +53,6 @@ fun alphabet(): String = StringBuilder().apply {
 
 
 fun main() {
-    // val result = alphabet()
-    // println(result)
+    val result = alphabet()
+    println(result)
 }
