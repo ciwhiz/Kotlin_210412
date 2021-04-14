@@ -119,7 +119,31 @@ class Country(val name: String, val city: City?)
 class City(val name: String, val address: Address?)
 class Address(val name: String)
 
+open class Car
+
+class Truck : Car()
+
+class Sedan : Car() {
+    fun go() {
+        println("Sedan go!")
+    }
+}
+
+
 fun main() {
+    val car: Car = Truck()
+
+    // as?: Cast가 실패하면, null을 반환합니다.
+    // val sedan: Sedan? = car as? Sedan
+    // sedan?.go()
+
+    // Smart cast
+    if (car is Sedan) {
+        car.go()
+    }
+
+
+
     val country: Country? = Country("KR", City("Seoul", Address("Gangnam")))
     if (country != null) {
         if (country.city != null) {
@@ -132,7 +156,6 @@ fun main() {
     country?.city?.address?.name?.let { name ->
         println(name)
     }
-
 }
 
 
