@@ -10,6 +10,7 @@ data class Car(val name: String, val color: Int, val speed: Int)
 
 // toJSON()
 fun <T> T.toJSON(): String {
+    println("toJSON()")
     val gson = Gson()
     return gson.toJson(this)
 }
@@ -24,13 +25,22 @@ fun <A, B> ((A) -> B).memoized(): (A) -> B {
     }
 }
 
-
 fun main() {
     val user = User("Tom", 42)
-    val car = Car("Sonata", 255, 100)
+    val user2 = User("Tom2", 100)
+    // println(user.toJSON())
 
-    println(user.toJSON())
-    println(car.toJSON())
+    val userToJSON = Any::toJSON.memoized()
+    println(userToJSON(user))
+    println(userToJSON(user2))
+    println(userToJSON(user))
+    println(userToJSON(user2))
+    println(userToJSON(user))
+
+
+    // val car = Car("Sonata", 255, 100)
+    // println(car.toJSON())
+
 }
 
 
