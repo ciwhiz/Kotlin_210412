@@ -80,8 +80,32 @@ class View {
     val loginButton: Button = Button()
 }
 
+class User {
+    fun setName(name: String) {
+
+    }
+
+    fun setAge(age: Int) {
+
+    }
+}
 
 fun main() {
+    val user1 = User()
+    user1.setName("Tom")
+    user1.setAge(42)
+
+    val user2 = User().apply {
+        setName("Tom")
+        setAge(42)
+    }
+
+    val user3 = User().also { user ->
+        user.setName("Tom")
+        user.setAge(42)
+    }
+
+
     val holder = ViewHolder()
     holder.view.nameTextView.text = "Tom"
     holder.view.emailTextView.text = "hello@gmail.com"
