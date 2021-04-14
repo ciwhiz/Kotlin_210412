@@ -54,6 +54,7 @@ fun getUser(): User? {
 var email: String? = null
 var address: String? = null
 
+/*
 fun main() {
     /*
     val email = "hello@gmail.com"
@@ -106,6 +107,7 @@ fun main() {
         user.sendMail(email, address)
     }
 }
+*/
 
 /*
 public inline fun <T, R> T.let(block: (T) -> R): R {
@@ -113,6 +115,25 @@ public inline fun <T, R> T.let(block: (T) -> R): R {
 }
 */
 
+class Country(val name: String, val city: City?)
+class City(val name: String, val address: Address?)
+class Address(val name: String)
+
+fun main() {
+    val country: Country? = Country("KR", City("Seoul", Address("Gangnam")))
+    if (country != null) {
+        if (country.city != null) {
+            if (country.city.address != null) {
+                println(country.city.address.name)
+            }
+        }
+    }
+
+    country?.city?.address?.name?.let { name ->
+        println(name)
+    }
+
+}
 
 
 
