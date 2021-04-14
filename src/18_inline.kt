@@ -3,6 +3,7 @@ package ex18
 
 import java.util.concurrent.locks.Lock
 import java.util.concurrent.locks.ReentrantLock
+import kotlin.concurrent.withLock
 
 // Kotlin은 synchronized 키워드가 제공되지 않습니다.
 //  => 명시적인 락을 이용해서 동기화를 직접 수행해주어야 합니다.
@@ -47,6 +48,7 @@ fun <T> withLock(lock: Lock, action: () -> T): T {
 
 // inline: 함수를 호출하는 것이 아니라 바이트 코드로 치환하는 기술
 //   - 함수를 인자로 받는 고차 함수에서만 사용할 수 있습니다.
+/*
 inline fun <T> Lock.withLock(action: () -> T): T {
     lock()
     try {
@@ -55,6 +57,7 @@ inline fun <T> Lock.withLock(action: () -> T): T {
         unlock()
     }
 }
+*/
 
 class IncThread(val lock: Lock) : Thread() {
     companion object {
