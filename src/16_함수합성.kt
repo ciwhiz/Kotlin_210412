@@ -44,10 +44,11 @@ fun main() {
 */
 
 // 1. 일반화
-
-//fun <A, B, C> compose(f: (A) -> B, g: (B) -> C): (A) -> C = { x ->
-//    g(f(x))
-//}
+/*
+fun <A, B, C> compose(f: (A) -> B, g: (B) -> C): (A) -> C = { x ->
+    g(f(x))
+}
+*/
 
 // 2. 확장 함수 + 중위 함수
 infix fun <A, B, C> ((A) -> B).compose(g: (B) -> C): (A) -> C = { x ->

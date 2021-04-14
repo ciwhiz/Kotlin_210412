@@ -59,7 +59,7 @@ inline fun <T> Lock.withLock(action: () -> T): T {
 }
 */
 
-class IncThread(val lock: Lock) : Thread() {
+class IncThread(private val lock: Lock) : Thread() {
     companion object {
         var n: Int = 0
     }
@@ -110,7 +110,7 @@ class IncThread(val lock: Lock) : Thread() {
 }
 
 fun main() {
-    var n = {
+    val n = {
         "hello"
     }
     println(n)

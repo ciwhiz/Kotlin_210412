@@ -9,10 +9,14 @@ fun <T> print(element: T) {
     println(element)
 }
 
-//fun print(element: Any) {
-//    println(element)
-//}
+// 타입 소거 방식
+/*
+fun print(element: Any) {
+    println(element)
+}
+*/
 
+// 코드 생성 방식
 /*
 fun print(element: Int) {
     println(element)
@@ -40,7 +44,7 @@ fun print(element: String) {
 
 /*
 fun main() {
-    // print<String>(42)      // T = Int
+    // print(42)      // T = Int
     print(3.14)    // T = Double
     print("Hello") // T = String
 }
