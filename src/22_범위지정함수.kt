@@ -37,11 +37,18 @@ inline fun <T> T.apply1(block: T.() -> Unit): T {
 }
 
 // apply - Builder 생성 로직에서 많이 사용됩니다.
-fun alphabet(): String = StringBuilder().apply {
+fun alphabet_apply(): String = StringBuilder().apply {
     for (letter in 'A'..'Z') {
         append(letter)
     }
 }.toString()
+
+// buildString
+fun alphabet(): String = buildString {
+    for (letter in 'A'..'Z') {
+        append(letter)
+    }
+}
 
 
 //fun alphabet(): String = with(StringBuilder()) {
