@@ -11,6 +11,7 @@ fun fib(k: Int): Long = when (k) {
 }
 */
 
+/*
 val cache = mutableMapOf<Int, Long>()
 fun fib(k: Int): Long = when (k) {
     0, 1 -> 1
@@ -24,6 +25,16 @@ fun fib(k: Int): Long = when (k) {
             cache[k] = n
             n
         }
+    }
+}
+*/
+
+val cache = mutableMapOf<Int, Long>()
+fun fib(k: Int): Long = cache.getOrPut(k) {
+    // 값이 존재하지 않을 경우 수행되는 로직
+    when (k) {
+        0, 1 -> 1
+        else -> fib(k - 1) + fib(k - 2)
     }
 }
 
