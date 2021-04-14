@@ -3,7 +3,7 @@ package ex12_2
 import java.time.LocalDateTime
 
 open class View {
-    open fun click() = println("View click2222")
+    // open fun click() = println("View click2222")
 }
 
 fun View.click() = println("View click")

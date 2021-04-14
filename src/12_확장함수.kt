@@ -36,7 +36,6 @@ fun main() {
 }
 */
 
-
 // Extension Function: 매우 중요합니다.
 //  => 코틀린 라이브러리의 핵심적인 설계 기술
 //  => 수평 확장 vs 수직 확장
@@ -61,7 +60,6 @@ fun lastChar(text: String): Char {
 //  (String) -> Char
 // fun lastChar(text: String): Char = text[text.length - 1]
 // -> lastChar("hello")
-
 
 //  (String) -> Char
 fun String.lastChar(): Char = this[length - 1]
