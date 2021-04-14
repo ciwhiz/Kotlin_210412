@@ -17,8 +17,11 @@ fun <T> T.toJSON(): String {
 
 // Design Pattern - Flyweight Pattern
 //  의도: 속성이 동일한 객체는 공유하자.
+//    - '불변 객체' 를 대상으로 사용해야 한다.
 
 // 기존 함수에 메모이제이션의 기능을 추가하는 함수 - "고차함수"
+//  Map<K, V>
+//   K: equals / hashCode
 fun <A, B> ((A) -> B).memoized(): (A) -> B {
     val cache = mutableMapOf<A, B>()
     return { k ->
@@ -30,7 +33,7 @@ fun <A, B> ((A) -> B).memoized(): (A) -> B {
 
 fun main() {
     val user = User("Tom", 42)
-    val user2 = User("Tom2", 100)
+    val user2 = User("Tom", 42)
     // println(user.toJSON())
 
     val userToJSON = Any::toJSON.memoized()
