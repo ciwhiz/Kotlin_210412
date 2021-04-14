@@ -35,10 +35,14 @@ fun main() {
 // fun isEven(e: Int) = e % 2 == 0
 
 // modulo의 함수를 통해 isOdd / isEven 실행시간에 생성해서 사용하고 싶다
-fun modulo(k: Int, r: Int): (Int) -> Boolean {
+fun modulo1(k: Int, r: Int): (Int) -> Boolean {
     return { e: Int ->
         e % k == r
     }
+}
+
+fun modulo(k: Int, r: Int): (Int) -> Boolean = { e: Int ->
+    e % k == r
 }
 
 fun main() {
