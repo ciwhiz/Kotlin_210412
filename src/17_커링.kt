@@ -109,8 +109,29 @@ fun log(level: Level, appendable: Appendable, message: String) {
     appendable.appendLine("[${level.name}][${LocalDateTime.now()}]: $message")
 }
 
+fun compute(logger: ((String) -> Unit)? = null) {
+    // logger("compute 시작")
+    // logger("compute 실행")
+    // logger("compute 완료")
+
+    logger?.invoke("compute 시작")
+    logger?.invoke("compute 실행")
+    logger?.invoke("compute 완료")
+}
+
 fun main() {
     log(Level.INFO, System.out, "main 시작")
+
+    // 1. 람다 표현식
+    compute { message ->
+        log(Level.INFO, System.out, message)
+    }
+
+    // 2. 커링 - 부분 적용
+    val clog = ::log.curried()
+    val logger = clog(Level.INFO)(System.out)
+
+    compute(logger)
 }
 
 
