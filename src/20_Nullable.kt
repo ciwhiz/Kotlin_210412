@@ -5,6 +5,8 @@ import ex4.add
 
 // Nullable
 //  : 'null'을 안전하게 다루는 방법
+// - Java 8: Optional
+//   Maybe
 
 class User {
     fun sendMail(email: String) {
@@ -15,6 +17,8 @@ class User {
     fun sendMail(email: String, address: String) {
     }
 
+    //           val email: String?
+    //           val address: String?
     fun sendMail2(email: String?, address: String?) {
         /*
         email?.let { email ->

@@ -8,6 +8,7 @@ fun lookForAlice1(people: List<Person>) {
     for (person in people) {
         if (person.name == "Alice") {
             println("Found!!")
+            // return
             // continue
             break
         }
@@ -16,6 +17,10 @@ fun lookForAlice1(people: List<Person>) {
     }
 
     println("Failed to find Alice")
+}
+
+inline fun <T> Iterable<T>.forEach2(action: (T) -> Unit): Unit {
+    for (element in this) action(element)
 }
 
 // 2. forEach

@@ -4,7 +4,7 @@ package ex22
 import java.lang.StringBuilder
 
 // 1. let - Nullable
-// 2. with / apply
+// 2. with / apply / also
 
 /*
 fun alphabet(): String {
@@ -17,7 +17,11 @@ fun alphabet(): String {
 */
 
 // 수신 객체(this) 지정 람다
-//  T.() -> R
+//  1. T.() -> R
+//    T가 this로 암묵적으로 전달된다.
+//  2. (T) -> R
+//    T가 명시적으로 전달된다. - it
+
 inline fun <T, R> with1(receiver: T, block: T.() -> R): R {
     // return block(receiver)
     return receiver.block()
@@ -95,11 +99,13 @@ fun main() {
     user1.setName("Tom")
     user1.setAge(42)
 
+    // block: T.() -> Unit
     val user2 = User().apply {
         setName("Tom")
         setAge(42)
     }
 
+    // block: (T) -> Unit
     val user3 = User().also { user ->
         user.setName("Tom")
         user.setAge(42)

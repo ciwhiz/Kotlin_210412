@@ -18,6 +18,11 @@ fun <T> T.toJSON(): String {
     return gson.toJson(this)
 }
 
+// OCP: Open-Close Principle
+//  - 개방 폐쇄의 원칙
+//  - 코드는 수정에는 닫혀 있고, 확장에는 열려 있어야 한다.
+//  - 새로운 기능이 추가되어도 기존 코드는 수정되면 안된다.
+
 
 // Design Pattern - Flyweight Pattern
 //  의도: 속성이 동일한 객체는 공유하자.
