@@ -2,6 +2,7 @@ package io.yoondev.firstapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import io.yoondev.firstapp.databinding.MainAcitivityBinding
 
 //      Project-level: build.gradle
@@ -39,11 +40,13 @@ class MainActivity : AppCompatActivity() {
         }
         */
 
-        with (binding) {
+        /*
+        with(binding) {
             okButton.setOnClickListener {
                 nameTextView.text = "OK"
             }
         }
+        */
 
 
         // setContentView(R.layout.activity_main)
@@ -60,7 +63,27 @@ class MainActivity : AppCompatActivity() {
             textView.text = "OK"
         }
         */
-
-
     }
 }
+
+
+// Fragment
+class MainFragment : Fragment() {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
