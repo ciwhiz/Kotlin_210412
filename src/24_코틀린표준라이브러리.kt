@@ -116,7 +116,8 @@ fun main() {
     val cities = listOf("서울 강서구", "서울 강남구", "서울 영등포구", "수원 영통구", "수원 장안구", "대구 수서구", "부산 강서구")
     val result: Map<String, List<String>> = cities.groupBy { e ->
         val city = e.split(" ")
-        city[0]
+        // city[0]
+        city[1]      // equals / hashCode
     }
 
     println(result)
