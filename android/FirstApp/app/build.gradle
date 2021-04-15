@@ -2,7 +2,9 @@ plugins {
     id 'com.android.application'
     //-----
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
+
+    // Deprecated
+    // id 'kotlin-android-extensions'
     //-----
 }
 
@@ -35,6 +37,16 @@ android {
         jvmTarget = '1.8'
     }
     //------
+
+    // View Binding - Obsolete
+    /*
+    viewBinding {
+        enabled = true
+    }
+    */
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {

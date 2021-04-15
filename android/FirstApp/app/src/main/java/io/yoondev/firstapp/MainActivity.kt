@@ -2,27 +2,37 @@ package io.yoondev.firstapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_main.*
+import io.yoondev.firstapp.databinding.MainAcitivityBinding
 
 //      Project-level: build.gradle
 //  Module-level(app): build.gradle
 
 class MainActivity : AppCompatActivity() {
+
+
+    // activity_main.xml
+    // var binding: ActivityMainBinding
+
+    // main_activity.xml
+    var binding: MainAcitivityBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        // setContentView(R.layout.activity_main)
 
         // 1. findViewById
         //  Java: ButterKnife
         // val textView = findViewById<TextView>(R.id.textView)
         // textView.text = "Hello"
 
-        // 2. kotlin-android-extension - Deprecated!
+        // 2. kotlin-android-extensions - Deprecated!
+        /*
         textView.text = "Hello"
         button.setOnClickListener {
             textView.text = "OK"
         }
+        */
 
         // 3. View-Binding
 
