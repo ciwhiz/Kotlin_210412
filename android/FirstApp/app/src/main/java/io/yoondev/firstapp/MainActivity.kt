@@ -5,7 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import io.yoondev.firstapp.databinding.ListFragmentBinding
 import io.yoondev.firstapp.databinding.MainActivity2Binding
 import io.yoondev.firstapp.databinding.MainFragmentBinding
@@ -175,6 +179,46 @@ class ListFragment : Fragment() {
     }
 }
 
+// View-Binding X
+private class ListAdapter : RecyclerView.Adapter<ListAdapter.Holder>() {
+
+    val items = emptyList<String>()
+
+    class Holder(parent: ViewGroup) : RecyclerView.ViewHolder(
+        LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.list_item, parent, false)
+    )
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder = Holder(parent)
+
+    override fun getItemCount(): Int = items.count()
+
+    override fun onBindViewHolder(holder: Holder, position: Int) {
+
+        with(holder.itemView) {
+            val nameTextView = findViewById<TextView>(R.id.nameTextView)
+            val commitButton = findViewById<Button>(R.id.commitButton)
+
+            nameTextView.text = items[position]
+            commitButton.setOnClickListener {
+                Toast.makeText(context, items[position], Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        /*
+        val nameTextView = holder.itemView.findViewById<TextView>(R.id.nameTextView)
+        val commitButton = holder.itemView.findViewById<Button>(R.id.commitButton)
+
+        nameTextView.text = items[position]
+        commitButton.setOnClickListener {
+            Toast.makeText(holder.itemView.context, items[position], Toast.LENGTH_SHORT).show()
+        }
+        */
+    }
+
+
+}
 
 
 
