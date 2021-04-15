@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.yoondev.firstapp.databinding.ListFragmentBinding
 import io.yoondev.firstapp.databinding.MainActivity2Binding
@@ -175,6 +176,13 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val adapter = ListAdapter()
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(view.context)
+
+        adapter.items = listOf(
+            "Tom", "Bob", "Alice",
+        )
 
     }
 }
@@ -182,7 +190,7 @@ class ListFragment : Fragment() {
 // View-Binding X
 private class ListAdapter : RecyclerView.Adapter<ListAdapter.Holder>() {
 
-    val items = emptyList<String>()
+    var items = emptyList<String>()
 
     class Holder(parent: ViewGroup) : RecyclerView.ViewHolder(
         LayoutInflater
@@ -195,7 +203,6 @@ private class ListAdapter : RecyclerView.Adapter<ListAdapter.Holder>() {
     override fun getItemCount(): Int = items.count()
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-
         with(holder.itemView) {
             val nameTextView = findViewById<TextView>(R.id.nameTextView)
             val commitButton = findViewById<Button>(R.id.commitButton)
