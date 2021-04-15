@@ -37,8 +37,80 @@ fun foo(): Nothing {
     // throw IllegalStateException("error!")
 }
 
+/*
 fun main() {
     foo()
-
     // logMessage("a.txt", null)
 }
+*/
+
+//  Java 8 - Stream API
+//   : 자바에서 컬렉션을 대상으로 데이터를 변환하거나, 생성 등의 작업을 편리하게 할 수 있는 연산자를 제공합니다.
+//   android minimum SDK - 24
+
+// 3. Sequence API
+//   : 코틀린에서 컬렉션에 대해서 다양한 연산자를 제공합니다.
+
+//   - forEach
+//   - filter
+//   - map: transform - 각각의 요소를 새로운 데이터로 변환한다.
+
+fun main() {
+    val cities = listOf("Seoul", "Suwon", "Daegu", "Busan")
+
+    /*
+    cities
+        .filter { e ->
+            e.startsWith("S")
+        }
+        .map { e ->          // String -> Int
+            e.length         // String::length(this: String)
+        }
+        .forEach(::println)
+   */
+    /*
+    cities
+        .filter { e ->
+            e.startsWith("S")
+        }
+        .map(String::length)
+        .forEach(::println)
+     */
+
+
+    val result2: List<String> = cities
+        .map { e ->                       // String -> String?
+            if (e.startsWith("S"))
+                e.toUpperCase()
+            else
+                null
+        }
+        .filterNotNull()                  // String? -> String?
+
+
+    val result: List<String> = cities
+        .mapNotNull { e ->                       // String -> String? -> filterNotNull -> String
+            if (e.startsWith("S"))          //  T     ->   U?    -> filterNotNull -> U
+                e.toUpperCase()
+            else
+                null
+        }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
