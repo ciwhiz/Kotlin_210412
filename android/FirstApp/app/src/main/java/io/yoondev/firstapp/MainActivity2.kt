@@ -100,6 +100,8 @@ class MainActivity2 : AppCompatActivity() {
             putInt("age", 42)
         }
 
+        // : fragment-ktx
+
 
 
 
