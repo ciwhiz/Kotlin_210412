@@ -57,10 +57,12 @@ fun main() {
 //   - map: T -> U
 //     mapNotNull
 
+//   - flatMap: List<T> -> map     -> List<List<U>>
+//              List<T> -> flatMap -> List<U>
 
 fun main() {
     // val cities = listOf("Seoul", "Suwon", "Daegu", "Busan")
-    val cities = listOf("서울 강서구", "수원 영통구", "대구 수서구", "부산 강서구")
+
 
     /*
     cities
@@ -102,14 +104,22 @@ fun main() {
         }
     */
 
+    /*
     val result = cities
         .flatMap { e ->                // List<String> -> map      -> List<List<String>>
             e.split(" ")     // List<String> -> flatMap  -> List<String>
         }
 
     println(result)
+    */
 
+    val cities = listOf("서울 강서구", "서울 강남구", "서울 영등포구", "수원 영통구", "수원 장안구", "대구 수서구", "부산 강서구")
+    val result: Map<String, List<String>> = cities.groupBy { e ->
+        val city = e.split(" ")
+        city[0]
+    }
 
+    println(result)
 }
 
 
