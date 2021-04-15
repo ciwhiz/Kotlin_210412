@@ -1,6 +1,7 @@
 package io.yoondev.firstapp
 
 import android.app.Activity
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
@@ -66,7 +68,6 @@ class MainActivity2 : AppCompatActivity() {
     )
     */
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.mainFrame
@@ -77,13 +78,41 @@ class MainActivity2 : AppCompatActivity() {
         }
         */
 
+        // KTX - Kotlin Extensions
+        //  : core-ktx
+        val pref = getSharedPreferences("firstapp", Context.MODE_PRIVATE)
+        /*
+        val editor = pref.edit()
+        editor.putString("name", "Tom")
+        editor.putInt("age", 42)
+        editor.apply()
+        */
+
+        // commit
+        pref.edit(commit = true) {
+            putString("name", "Tom")
+            putInt("age", 42)
+        }
+
+        // apply
+        pref.edit {
+            putString("name", "Tom")
+            putInt("age", 42)
+        }
+
+
+
+
+
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.mainFrame, MainFragment2())
+            .replace(R.id.mainFrame, MainFragment())
             .commitNow()
     }
 }
 
+
+/*
 class MainFragment2 : Fragment() {
     private val binding: MainFragmentBinding by viewBinding()
 
@@ -104,6 +133,7 @@ class MainFragment2 : Fragment() {
 //        }
 //    }
 }
+*/
 
 
 //-------
