@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commitNow
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
@@ -101,15 +102,16 @@ class MainActivity2 : AppCompatActivity() {
         }
 
         // : fragment-ktx
-
-
-
-
-
+        /*
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.mainFrame, MainFragment())
             .commitNow()
+        */
+
+        supportFragmentManager.commitNow {
+            replace(R.id.mainFrame, MainFragment())
+        }
     }
 }
 
