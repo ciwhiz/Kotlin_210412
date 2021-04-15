@@ -36,6 +36,10 @@ class SList<E> : Iterable<E> {
 }
 
 fun main() {
+
+    /*
+    val list = listOf(10, 20, 30)
+    */
     val list = SList<Int>()
     list.addFront(10)
     list.addFront(20)
@@ -43,30 +47,16 @@ fun main() {
 
     println(list.front)
 
+
     // 컬렉션의 이용자는 컬렉션이 제공하는 반복자의 구체적인 타입 이름을 알 수 없습니다.
     // => 컬렉션의 설계자는 반드시 반복자를 제공하는 인터페이스를 구현해야 합니다. - Iterable
-
-    // val iterator = SListIterator(list.head)
     val iterator = list.iterator()
     while (iterator.hasNext()) {
         println("${iterator.next()}")
     }
 
-    /*
-    val list = listOf(10, 20, 30)
-
-    val iterator = list.iterator()
-    while (iterator.hasNext()) {
-        println("${iterator.next()}")
-    }
-    */
-
-
-    /*
+    // Iterator / Iterable
     for (e in list) {
         println(e)
     }
-    */
-
-
 }
