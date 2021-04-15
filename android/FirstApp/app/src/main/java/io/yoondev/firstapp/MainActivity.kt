@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.yoondev.firstapp.databinding.ListFragmentBinding
 import io.yoondev.firstapp.databinding.MainActivity2Binding
 import io.yoondev.firstapp.databinding.MainFragmentBinding
+import kotlin.properties.Delegates
 
 //      Project-level: build.gradle
 //  Module-level(app): build.gradle
@@ -184,13 +185,22 @@ class ListFragment : Fragment() {
             "Tom", "Bob", "Alice",
         )
 
+        binding.reloadButton.setOnClickListener {
+            adapter.items = listOf(
+                "A", "B", "C", "D"
+            )
+            // adapter.notifyDataSetChanged()
+        }
     }
 }
 
 // View-Binding X
 private class ListAdapter : RecyclerView.Adapter<ListAdapter.Holder>() {
 
-    var items = emptyList<String>()
+    // var items = emptyList<String>()
+    var items: List<String> by Delegates.observable(emptyList()) { _, _, _ ->
+        notifyDataSetChanged()
+    }
 
     class Holder(parent: ViewGroup) : RecyclerView.ViewHolder(
         LayoutInflater
