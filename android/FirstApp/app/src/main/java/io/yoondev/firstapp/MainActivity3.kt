@@ -66,53 +66,67 @@ class MainActivity3 : AppCompatActivity() {
         // api.github.com/users/JakeWharton
         binding.loadButton.setOnClickListener {
 
-            // 1. OKHttpClient 객체 생성
-            val client = OkHttpClient.Builder().apply {
-                /*
+            // SAM 지원
+            /*
+            Thread(object: Runnable {
+                override fun run() {
+
+                }
+            })
+            */
+
+            Thread {
+
+                // 1. OKHttpClient 객체 생성
+                val client = OkHttpClient.Builder().apply {
+                    /*
                 val loggingInterceptor = HttpLoggingInterceptor()
                 loggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
                 addInterceptor(loggingInterceptor)
                 */
 
-                addInterceptor(HttpLoggingInterceptor().apply {
-                    level = HttpLoggingInterceptor.Level.BASIC
-                })
+                    addInterceptor(HttpLoggingInterceptor().apply {
+                        level = HttpLoggingInterceptor.Level.BASIC
+                    })
 
-            }.build()
+                }.build()
 
-            // 2. Request 생성
-            //  : url / HTTP method / body / param
-            val request = Request.Builder().apply {
-                get()
-                url("https://api.github.com/users/JakeWharton")
-            }.build()
-
-
-            // 3. 'Call' 을 생성합니다.
-            //  '동기적' vs '비동기적'
-            //  동기: execute()
-            // 비동기: enqueue()
-            val call = client.newCall(request)
-
-            // 4. 동기적 호출(execute) - Response
-            val response: Response = call.execute()
-
-            // 5. Response
-            //  : HTTP status code
-            //   200 ~ 299: OK
-            //   400 ~ 499: Client Error!
-            //   500 ~ 599: Server Error!
+                // 2. Request 생성
+                //  : url / HTTP method / body / param
+                val request = Request.Builder().apply {
+                    get()
+                    url("https://api.github.com/users/JakeWharton")
+                }.build()
 
 
-            // if (response.code in 200..299) {
-            if (response.isSuccessful) {
+                // 3. 'Call' 을 생성합니다.
+                //  '동기적' vs '비동기적'
+                //  동기: execute()
+                // 비동기: enqueue()
+                val call = client.newCall(request)
 
-                response.body?.let { body ->
-                    val json = body.string()
-                    Log.e(TAG, "Response: $json")
+                // 4. 동기적 호출(execute) - Response
+                //  : NetworkOnMainThreadException
+                val response: Response = call.execute()
+
+                // 5. Response
+                //  : HTTP status code
+                //   200 ~ 299: OK
+                //   400 ~ 499: Client Error!
+                //   500 ~ 599: Server Error!
+
+
+                // if (response.code in 200..299) {
+                if (response.isSuccessful) {
+
+                    response.body?.let { body ->
+                        val json = body.string()
+                        Log.e(TAG, "Response: $json")
+                    }
+
                 }
 
-            }
+            }.start()
 
 
         }
