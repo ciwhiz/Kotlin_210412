@@ -57,7 +57,7 @@ inline fun <reified T : ViewBinding> Activity.viewBinding() =
 
 class MainActivity2 : AppCompatActivity() {
 
-    private val binding: MainActivityBinding by viewBinding()
+    private val binding: MainActivity2Binding by viewBinding()
 
     /*
     val binding: MainActivityBinding by ActivityBindingDelegate(
@@ -69,20 +69,41 @@ class MainActivity2 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        binding.mainFrame
+        /*
         binding.nameTextView.text = "hello"
         binding.okButton.setOnClickListener {
             Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show()
         }
+        */
 
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.mainFrame, MainFragment2())
+            .commitNow()
     }
 }
 
 class MainFragment2 : Fragment() {
-    
+    private val binding: MainFragmentBinding by viewBinding()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return binding.root
+    }
+
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        // super.onViewCreated(view, savedInstanceState)
+//
+//        binding.nameTextView.text = "Hello"
+//        binding.okButton.setOnClickListener {
+//            Toast.makeText(view.context, "Hello", Toast.LENGTH_SHORT).show()
+//        }
+//    }
 }
-
-
 
 
 //-------
