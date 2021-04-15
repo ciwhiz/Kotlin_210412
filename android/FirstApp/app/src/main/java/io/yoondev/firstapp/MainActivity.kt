@@ -105,6 +105,7 @@ class MainFragment : Fragment() {
     */
 
     private var _binding: MainFragmentBinding? = null
+
     private val binding: MainFragmentBinding
         get() = _binding!!
 
