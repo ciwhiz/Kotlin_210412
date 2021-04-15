@@ -13,16 +13,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         // 1. findViewById
         //  Java: ButterKnife
         // val textView = findViewById<TextView>(R.id.textView)
         // textView.text = "Hello"
 
-        // 2. kotlin-android-extension
+        // 2. kotlin-android-extension - Deprecated!
         textView.text = "Hello"
         button.setOnClickListener {
             textView.text = "OK"
         }
+
+        // 3. View-Binding
+
+
     }
 }
