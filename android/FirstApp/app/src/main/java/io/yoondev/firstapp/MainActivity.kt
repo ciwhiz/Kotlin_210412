@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.yoondev.firstapp.databinding.ListFragmentBinding
+import io.yoondev.firstapp.databinding.ListItemBinding
 import io.yoondev.firstapp.databinding.MainActivity2Binding
 import io.yoondev.firstapp.databinding.MainFragmentBinding
 import kotlin.properties.Delegates
@@ -195,6 +196,7 @@ class ListFragment : Fragment() {
 }
 
 // View-Binding X
+/*
 private class ListAdapter : RecyclerView.Adapter<ListAdapter.Holder>() {
 
     // var items = emptyList<String>()
@@ -233,10 +235,34 @@ private class ListAdapter : RecyclerView.Adapter<ListAdapter.Holder>() {
         }
         */
     }
+}
+ */
 
+
+private class ListAdapter : RecyclerView.Adapter<ListAdapter.Holder>() {
+    var items: List<String> by Delegates.observable(emptyList()) { _, _, _ ->
+        notifyDataSetChanged()
+    }
+
+    class Holder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+        val binding = ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return Holder(binding)
+    }
+
+    override fun onBindViewHolder(holder: Holder, position: Int) {
+
+        holder.binding.nameTextView.text = items[position]
+        holder.binding.commitButton.setOnClickListener {
+            Toast.makeText(holder.itemView.context, items[position], Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    override fun getItemCount(): Int = items.count()
 
 }
-
 
 
 
