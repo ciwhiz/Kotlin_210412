@@ -113,6 +113,9 @@ fun main() {
     println(result)
     */
 
+
+    // groupBy
+    /*
     val cities = listOf("서울 강서구", "서울 강남구", "서울 영등포구", "수원 영통구", "수원 장안구", "대구 수서구", "부산 강서구")
     val result: Map<String, List<String>> = cities.groupBy { e ->
         val city = e.split(" ")
@@ -121,6 +124,44 @@ fun main() {
     }
 
     println(result)
+    */
+
+    // take: 컬렉션에서 요소를 추출합니다.
+    // drop: 컬렉션에서 원하지 않는 요소를 제거한 컬렉션을 반환합니다.
+    // first / firstOrNull
+    // last  / lastOrNull
+    // distinct: 중복된 요소를 제거한 버전을 반환합니다.
+
+    val list = listOf(1, 2, 3, 4, 5, 5, 4, 3, 2, 1, 1, 2, 3, 4, 5)
+    // val list = emptyList<Int>()
+    // if (list.isNotEmpty())
+    //    println(list[0])
+
+//    list.firstOrNull()?.let(::println)
+//    list.lastOrNull()?.let(::println)
+//    println(list.take(5))
+//    println(list.drop(3))
+
+    val result = list.takeWhile {
+        println(it)
+        it < 5
+    }
+    println(result)
+
+    val result2 = list.distinct()
+    println(result2)
+
+    // zip
+    val a = listOf("Korea", "UnitedState", "China")
+    val b = listOf("KR", "US", "CN")
+
+    a.zip(b).forEach(::println)
+    a.zip(b).forEach { e ->
+        println("${e.first} / ${e.second}")
+    }
+    a.zip(b).forEach { (city, code) ->
+        println("$city / $code")
+    }
 }
 
 
