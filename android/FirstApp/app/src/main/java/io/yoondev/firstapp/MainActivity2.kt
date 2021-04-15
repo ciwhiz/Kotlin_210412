@@ -46,13 +46,20 @@ class ActivityBindingDelegate<T : ViewBinding>(
     }
 }
 
+inline fun <reified T : ViewBinding> Activity.viewBinding() =
+    ActivityBindingDelegate(T::class.java, this)
+
 
 class MainActivity2 : AppCompatActivity() {
 
+    private val binding: MainActivityBinding by viewBinding()
+
+    /*
     val binding: MainActivityBinding by ActivityBindingDelegate(
         MainActivityBinding::class.java,
         this
     )
+    */
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
