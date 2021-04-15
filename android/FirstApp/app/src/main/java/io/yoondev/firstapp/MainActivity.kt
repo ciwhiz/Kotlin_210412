@@ -33,9 +33,18 @@ class MainActivity : AppCompatActivity() {
         binding = MainAcitivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        /*
         binding.okButton.setOnClickListener {
             binding.nameTextView.text = "OK"
         }
+        */
+
+        with (binding) {
+            okButton.setOnClickListener {
+                nameTextView.text = "OK"
+            }
+        }
+
 
         // setContentView(R.layout.activity_main)
 
