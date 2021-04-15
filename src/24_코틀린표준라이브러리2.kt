@@ -59,4 +59,13 @@ fun main() {
     for (e in list) {
         println(e)
     }
+
+    val result = list
+        .filter {
+            it % 2 == 0
+        }
+        .map { e ->
+            e + 10
+        }
+    println(result)
 }
