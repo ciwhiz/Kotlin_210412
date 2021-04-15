@@ -14,11 +14,13 @@ class MainActivity : AppCompatActivity() {
     // var binding: ActivityMainBinding
 
     // main_activity.xml
-    var binding: MainAcitivityBinding
-
+    lateinit var binding: MainAcitivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = MainAcitivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         // setContentView(R.layout.activity_main)
 
         // 1. findViewById
