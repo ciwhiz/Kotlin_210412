@@ -50,11 +50,12 @@ fun main() {
 
 // 3. Sequence API
 //   : 코틀린에서 컬렉션에 대해서 다양한 연산자를 제공합니다.
-
 //   - forEach
-//   - filter
-//   - map: transform - 각각의 요소를 새로운 데이터로 변환한다.
+//   - filter / filterNotNull(T? -> T)
 
+//   transform - 각각의 요소를 새로운 데이터로 변환한다.
+//   - map: T -> U
+//     mapNotNull
 fun main() {
     val cities = listOf("Seoul", "Suwon", "Daegu", "Busan")
 
@@ -85,7 +86,7 @@ fun main() {
             else
                 null
         }
-        .filterNotNull()                  // String? -> String?
+        .filterNotNull()                  // String? -> String
 
 
     val result: List<String> = cities
