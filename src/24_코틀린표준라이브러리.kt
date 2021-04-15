@@ -56,8 +56,11 @@ fun main() {
 //   transform - 각각의 요소를 새로운 데이터로 변환한다.
 //   - map: T -> U
 //     mapNotNull
+
+
 fun main() {
-    val cities = listOf("Seoul", "Suwon", "Daegu", "Busan")
+    // val cities = listOf("Seoul", "Suwon", "Daegu", "Busan")
+    val cities = listOf("서울 강서구", "수원 영통구", "대구 수서구", "부산 강서구")
 
     /*
     cities
@@ -79,6 +82,7 @@ fun main() {
      */
 
 
+    /*
     val result2: List<String> = cities
         .map { e ->                       // String -> String?
             if (e.startsWith("S"))
@@ -96,6 +100,15 @@ fun main() {
             else
                 null
         }
+    */
+
+    val result = cities
+        .flatMap { e ->                // List<String> -> map      -> List<List<String>>
+            e.split(" ")     // List<String> -> flatMap  -> List<String>
+        }
+
+    println(result)
+
 
 }
 
