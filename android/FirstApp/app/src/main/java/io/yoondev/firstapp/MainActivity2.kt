@@ -20,7 +20,7 @@ import kotlin.reflect.KProperty
 
 
 // Property Delegate
-class AcitivityBindingDelegate<T : ViewBinding>(
+class ActivityBindingDelegate<T : ViewBinding>(
     private val bindingClass: Class<T>,
     val activity: Activity
 ) : ReadOnlyProperty<Activity, T> {
@@ -49,7 +49,7 @@ class AcitivityBindingDelegate<T : ViewBinding>(
 
 class MainActivity2 : AppCompatActivity() {
 
-    val binding: MainActivityBinding by AcitivityBindingDelegate(
+    val binding: MainActivityBinding by ActivityBindingDelegate(
         MainActivityBinding::class.java,
         this
     )
