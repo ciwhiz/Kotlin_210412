@@ -79,8 +79,11 @@ class MainActivity : AppCompatActivity() {
 
 
 class MainFragment : Fragment() {
+
+
+    // Version 1.
+    /*
     private var binding: MainFragmentBinding? = null
-    
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -88,6 +91,39 @@ class MainFragment : Fragment() {
     ): View? {
         binding = MainFragmentBinding.inflate(inflater, container, false)
         return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val binding = binding ?: return
+        binding.nameTextView.text = "Hello"
+        binding.okButton.setOnClickListener {
+            binding.nameTextView.text = "OK"
+        }
+    }
+    */
+
+    private var _binding: MainFragmentBinding? = null
+    private val binding: MainFragmentBinding
+        get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = MainFragmentBinding.inflate(inflater, container, false)
+        return _binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.nameTextView.text = "Hello"
+        binding.okButton.setOnClickListener {
+            binding.nameTextView.text = "OK"
+        }
     }
 }
 
