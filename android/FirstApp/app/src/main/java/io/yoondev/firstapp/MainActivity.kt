@@ -13,7 +13,6 @@ import io.yoondev.firstapp.databinding.MainActivity2Binding
 
 class MainActivity : AppCompatActivity() {
 
-
     // activity_main.xml
     // var binding: ActivityMainBinding
 
@@ -37,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         //   - nameTextView
 
 
-        binding = MainAcitivityBinding.inflate(layoutInflater)
+        binding = MainActivity2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
         /*
