@@ -39,26 +39,35 @@ data class User(
     val email: String?,
 )
 
+// - Java(JVM) vs C#(CLR)
+//  C#: const     / readonly
+// C++: constexpr / const(compile-time / runtime)
 
 class MainActivity3 : AppCompatActivity() {
     private val binding: MainActivity3Binding by viewBinding()
 
-    // private static final String TAG = "MainActivity3"
-    // private static final String TAG = MainActivity3.class.getSimpleName()
+    // private static final String TAG = "MainActivity3" : 컴파일 타임 상수의 가능성이 있다.
+    // private static final String TAG = MainActivity3.class.getSimpleName() : 불가능
 
     // 상수
     // - 컴파일 타임 상수
     // - 런타임 상수: 메모리가 할당되어 있는 언어적으로 변경이 불가능하다.
 
     companion object {
-
-        // 컴파일 타임 상수 - const
+        // 컴파일 타임 상수 - const : 메모리 사용 X
         // private const val TAG1 = "MainActivity3"
 
-        // 컴파일 타임 상수 처리가 불가능합니다.
+        // 컴파일 타임 상수 처리가 불가능합니다. : 메모리 사용 O => 런타임 상수
         private val TAG = MainActivity3::class.java.simpleName
     }
 
+    init {
+        // System.loadLibrary("HelloJni")
+    }
+
+    // JNI
+    //   Java:   native void foo()
+    // Kotlin: external fun foo()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
