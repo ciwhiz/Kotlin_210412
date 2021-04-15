@@ -97,7 +97,7 @@ fun main() {
 
     val result: List<String> = cities
         .mapNotNull { e ->                       // String -> String? -> filterNotNull -> String
-            if (e.startsWith("S"))          //  T     ->   U?    -> filterNotNull -> U
+            if (e.startsWith("S"))               //  T     ->   U?    -> filterNotNull -> U
                 e.toUpperCase()
             else
                 null
@@ -106,7 +106,7 @@ fun main() {
 
     /*
     val result = cities
-        .flatMap { e ->                // List<String> -> map      -> List<List<String>>
+        .flatMap { e ->      // List<String> -> map      -> List<List<String>>
             e.split(" ")     // List<String> -> flatMap  -> List<String>
         }
 

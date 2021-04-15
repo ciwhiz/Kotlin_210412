@@ -69,3 +69,26 @@ fun main() {
         }
     println(result)
 }
+
+// ArrayList
+// LinkedList
+//   - 연산에 대한 부분들이 '메소드'를 통해 제공되었습니다.
+//   => 동일한 연산에 대한 코드 중복이 발생합니다.
+//     : Collections / Arrays
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

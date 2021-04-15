@@ -110,34 +110,24 @@ class MainActivity2 : AppCompatActivity() {
         */
 
         supportFragmentManager.commitNow {
-            replace(R.id.mainFrame, MainFragment())
+            replace(R.id.mainFrame, MainFragment2())
         }
     }
 }
 
 
-/*
-class MainFragment2 : Fragment() {
+class MainFragment2 : Fragment(R.layout.main_fragment) {
     private val binding: MainFragmentBinding by viewBinding()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return binding.root
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        // super.onViewCreated(view, savedInstanceState)
-//
-//        binding.nameTextView.text = "Hello"
-//        binding.okButton.setOnClickListener {
-//            Toast.makeText(view.context, "Hello", Toast.LENGTH_SHORT).show()
-//        }
-//    }
+        binding.nameTextView.text = "Hello"
+        binding.okButton.setOnClickListener {
+            Toast.makeText(view.context, "Hello!!!!", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
-*/
 
 
 //-------
