@@ -19,13 +19,23 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 3. View-Binding
+        // 1) Naming Convention
+        //   - main_activity.xml  => MainActivityBinding
+
+        //---------------------------------
+        //   - btn_ok             => btnOk
+        //   - tv_name            => tvName
+        //---------------------------------
+        //   - okButton
+        //   - nameTextView
+
+
         binding = MainAcitivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.button.setOnClickListener {
-            binding.textView.text = "OK"
+        binding.okButton.setOnClickListener {
+            binding.nameTextView.text = "OK"
         }
-
 
         // setContentView(R.layout.activity_main)
 
