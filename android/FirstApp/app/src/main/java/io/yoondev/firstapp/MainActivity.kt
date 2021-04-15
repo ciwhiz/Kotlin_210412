@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import io.yoondev.firstapp.databinding.MainActivity2Binding
+import io.yoondev.firstapp.databinding.MainFragmentBinding
 
 //      Project-level: build.gradle
 //  Module-level(app): build.gradle
@@ -77,7 +78,23 @@ class MainActivity : AppCompatActivity() {
 }
 
 
+class MainFragment : Fragment() {
+    private var binding: MainFragmentBinding? = null
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = MainFragmentBinding.inflate(inflater, container, false)
+        return binding?.root
+    }
+}
+
+
 // Fragment
+/*
 class MainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -87,6 +104,7 @@ class MainFragment : Fragment() {
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 }
+*/
 
 
 
