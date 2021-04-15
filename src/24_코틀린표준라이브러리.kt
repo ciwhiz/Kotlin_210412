@@ -61,7 +61,32 @@ fun main() {
 //              List<T> -> flatMap -> List<U>
 
 fun main() {
-    // val cities = listOf("Seoul", "Suwon", "Daegu", "Busan")
+    val cities = listOf("Seoul", "Suwon", "Daegu", "Busan")
+    val result3 = cities
+        // .stream()
+        .parallelStream()
+        .filter { e ->
+            e.startsWith("S")
+        }
+        .map(String::toUpperCase)
+    // .forEach(::println)
+
+    println(result3)
+    for (e in result3) {
+        println(e)
+    }
+
+    // Sequence API vs Stream API
+    // 1. Sequence API: 컬렉션을 전체의 요소를 메모리에 두고, 연산을 전체적으로 수행한다.
+    //  [ Seoul, Suwon, Daegu ] -> [ Seoul, Suwon ] -> [ SEOUL, SUWON]
+
+    // 2. Stream API: 한 개의 요소 단위로 연산을 수행한다.
+    //  [ Seoul, Suwon, Daegu ]
+    //    Seoul -> filter -> map -> SEOUL
+    //    Suwon -> filter -> map -> SUWON
+    //    Daegu -> filter ->
+
+    // 3. Suquence API - 컬렉션의 데이터가 많을 경우, 효과적으로 처리가 불가능합니다.
 
 
     /*
