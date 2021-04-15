@@ -2,8 +2,11 @@ package io.yoondev.firstapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import io.yoondev.firstapp.databinding.MainAcitivityBinding
+import io.yoondev.firstapp.databinding.MainActivity2Binding
 
 //      Project-level: build.gradle
 //  Module-level(app): build.gradle
@@ -15,7 +18,10 @@ class MainActivity : AppCompatActivity() {
     // var binding: ActivityMainBinding
 
     // main_activity.xml
-    lateinit var binding: MainAcitivityBinding
+    // lateinit var binding: MainActivityBinding
+
+
+    lateinit var binding: MainActivity2Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,13 +69,24 @@ class MainActivity : AppCompatActivity() {
             textView.text = "OK"
         }
         */
+
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.mainFrame, MainFragment())
+            .commitNow()
     }
 }
 
 
 // Fragment
 class MainFragment : Fragment() {
-
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.main_fragment, container, false)
+    }
 }
 
 
