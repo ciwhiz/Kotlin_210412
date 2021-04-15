@@ -80,8 +80,7 @@ class MainActivity : AppCompatActivity() {
 
 class MainFragment : Fragment() {
     private var binding: MainFragmentBinding? = null
-
-
+    
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
