@@ -18,8 +18,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // 3. View-Binding
         binding = MainAcitivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.button.setOnClickListener {
+            binding.textView.text = "OK"
+        }
+
 
         // setContentView(R.layout.activity_main)
 
@@ -35,8 +41,6 @@ class MainActivity : AppCompatActivity() {
             textView.text = "OK"
         }
         */
-
-        // 3. View-Binding
 
 
     }
