@@ -295,8 +295,6 @@ class MainActivity3 : AppCompatActivity() {
 
         }
     }
-
-
 }
 
 
