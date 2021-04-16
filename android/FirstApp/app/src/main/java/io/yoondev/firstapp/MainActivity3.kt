@@ -77,7 +77,7 @@ class MainActivity3 : AppCompatActivity() {
     // JNI
     //   Java:   native void foo()
     // Kotlin: external fun foo()
-
+    /*
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -95,8 +95,6 @@ class MainActivity3 : AppCompatActivity() {
             */
 
             Thread {
-
-
                 // 1. OKHttpClient 객체 생성
                 val client = OkHttpClient.Builder().apply {
                     /*
@@ -179,8 +177,6 @@ class MainActivity3 : AppCompatActivity() {
                                 GrayscaleTransformation(),
                             )
                         }
-
-
                     }
 
                 }
@@ -188,6 +184,21 @@ class MainActivity3 : AppCompatActivity() {
             }.start()
         }
     }
+    */
+
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+        // api.github.com/users/JakeWharton
+        binding.loadButton.setOnClickListener {
+
+        }
+    }
+
+
+
 }
 
 
