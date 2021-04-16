@@ -46,7 +46,6 @@ import io.yoondev.firstapp.databinding.MainActivity3Binding
 //                   onNext(1)
 //                   onError()
 
-
 // 3. Operator
 //  : 연산자(Operator)는 이벤트 스트림을 통해 전달되는 이벤트에 연산을 수행합니다.
 
@@ -54,13 +53,16 @@ import io.yoondev.firstapp.databinding.MainActivity3Binding
 //    1                             onNext(10)
 //    2                             onNext(20)
 
-
 // Observable - filter(e % 2 == 1) - (subscribe) Observer
 //    1                               onNext(1)
 //    2                                   X
 
-// 4.
-// 5.
+// 4. Scheduler
+//   : 작업을 수행할 스레드를 제어할 수 있습니다.
+
+// 5. Disposable
+//   : Observer가 Observable을 구독할 때 '이벤트 스트림'이 생성됩니다.
+//     이벤트 스트림 자원입니다. => 명시적인 종료가 필요합니다(dispose)
 
 
 
