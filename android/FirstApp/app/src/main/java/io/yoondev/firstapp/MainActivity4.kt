@@ -210,6 +210,26 @@ class MainActivity4 : AppCompatActivity() {
 
 
             // searchUser -> getUser -> location
+            // 비동기 호출: 흐름 제어 어렵다
+
+            // 동기
+            /*
+                a()
+                b()
+                c()
+            */
+
+            // 비동기 - Callback Hell
+            //  => Reactive eXtension => Rx
+            /*
+                a {
+                  b {
+                    c {
+
+                    }
+                  }
+                }
+            */
 
 
             githubApi.searchUser("hello", per_page = 100)
@@ -240,8 +260,6 @@ class MainActivity4 : AppCompatActivity() {
                                     toast("Error - ${t.localizedMessage}")
                                 }
                             )
-
-
                     },
                     onFailure = { t ->
                         toast("Error - ${t.localizedMessage}")
@@ -255,7 +273,7 @@ class MainActivity4 : AppCompatActivity() {
         binding.loginTextView.text = user.login
         binding.nameTextView.text = user.name
         binding.avatarImageView.load(user.avatarUrl) {
-            crossfade(3000)
+            crossfade(enable = true)
             transformations(
                 CircleCropTransformation(),
                 GrayscaleTransformation(),
