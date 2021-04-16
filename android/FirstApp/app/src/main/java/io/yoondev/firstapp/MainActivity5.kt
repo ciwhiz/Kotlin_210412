@@ -206,6 +206,24 @@ class MainActivity5 : AppCompatActivity() {
                 )
             */
 
+            // shuffled / first
+
+            githubApi.searchUserRx("hello")
+                .map { result ->
+                    result.items.shuffled()
+                }
+                .map {
+                    it.first()
+                }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onNext = { user ->
+                        updateUi(user)
+                    },
+                    onError = this::ignoreError
+                )
+
+
         }
 
 
