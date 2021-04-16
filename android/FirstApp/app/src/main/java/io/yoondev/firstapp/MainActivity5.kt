@@ -27,7 +27,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.time.LocalDateTime
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 // Reactive eXtension => Rx
 //  => 비동기 연산을 컬렉션을 다루는 것처럼 일반적인 연산을 통해 처리할 수 있다.
@@ -345,22 +347,27 @@ class MainActivity5 : AppCompatActivity() {
         */
 
         // Observable이 동작하는 스레드 컨텍스트에서 수행된다.
+
+        // LocalDateTime - minimum SDK 26
         /*
         compositeDisposable += binding.loadButton.clicks()
+            .throttleFirst(3, TimeUnit.SECONDS)
             .subscribeBy(
                 onNext = {
-                    toast("Touch")
+                    Log.e("XXX", "touched - ${Date()}")
                 },
                 onError = this::ignoreError,
             )
         */
 
-        binding.loadButton.clicks()   // Observable<Unit>
+
+        compositeDisposable += binding.loadButton.clicks()   // Observable<Unit>
+            .throttleFirst(3, TimeUnit.SECONDS)
             .flatMap {
                 githubApi.searchUserRx("hello", perPage = 100)
             }
             .map {
-                it.items
+                it.items.shuffled()
             }
             .filter {
                 it.isNotEmpty()
@@ -379,6 +386,8 @@ class MainActivity5 : AppCompatActivity() {
                 },
                 onError = this::ignoreError
             )
+
+
 
     }
 
