@@ -334,27 +334,50 @@ class MainActivity5 : AppCompatActivity() {
         compositeDisposable.add(disposable2)
       */
 
+        /*
         compositeDisposable += binding.loadButton.clicks()
             .subscribeBy(
                 onNext = {
                     Log.e("XXX", "onNext: onClick")
                 },
                 onError = this::ignoreError,
-                onComplete = {
-                    Log.e("XXX", "onComplete")
-                }
             )
+        */
 
-
+        // Observable이 동작하는 스레드 컨텍스트에서 수행된다.
+        /*
         compositeDisposable += binding.loadButton.clicks()
             .subscribeBy(
                 onNext = {
-                    Log.e("XXX", "onNext: onClick")
+                    toast("Touch")
                 },
                 onError = this::ignoreError,
-                onComplete = {
-                    Log.e("XXX", "onComplete")
-                }
+            )
+        */
+
+        binding.loadButton.clicks()   // Observable<Unit>
+            .flatMap {
+                githubApi.searchUserRx("hello", perPage = 100)
+            }
+            .map {
+                it.items
+            }
+            .filter {
+                it.isNotEmpty()
+            }
+            .map {
+                it.first()
+            }
+            .flatMap {
+                githubApi.getUserRx(it.login)
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onNext = {
+                    updateUi(it)
+                    toast(it.location ?: "Unknown")
+                },
+                onError = this::ignoreError
             )
 
     }
