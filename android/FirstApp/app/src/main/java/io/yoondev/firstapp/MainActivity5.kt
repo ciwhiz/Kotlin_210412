@@ -1,5 +1,6 @@
 package io.yoondev.firstapp
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -164,15 +165,14 @@ class MainActivity5 : AppCompatActivity() {
             )
             */
             // RxKotlin
+            /*
             observable
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onNext = { user ->
                         Log.e("TAG", "onNext: $user")
 
-
                         updateUi(user)
-
                     },
                     onError = { t ->
                         Log.e("TAG", "onError: ${t.localizedMessage}")
@@ -180,6 +180,22 @@ class MainActivity5 : AppCompatActivity() {
                     onComplete = {
                         Log.e("TAG", "onComplete")
                     }
+                )
+           */
+
+            observable
+//                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onNext = { user ->
+                        Log.e("TAG", "onNext: $user")
+
+                        updateUi(user)
+                    },
+                    // onError가 정의되지 않은 경우 - OnErrorNotImplementedException
+                    // onError = { t ->
+                    //    Log.e("TAG", "onError: ${t.localizedMessage}")
+                    // }
+                    onError = this::ignoreError  // Bound reference
                 )
 
 
@@ -200,7 +216,16 @@ class MainActivity5 : AppCompatActivity() {
         }
     }
 
+    /*
+    fun ignoreError(t: Throwable) {
+
+    }
+    */
 }
+
+fun Activity.ignoreError(t: Throwable) {}
+
+
 
 
 
