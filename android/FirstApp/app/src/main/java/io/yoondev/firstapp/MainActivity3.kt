@@ -168,17 +168,16 @@ class MainActivity3 : AppCompatActivity() {
                                 .circleCrop()
                                 .into(binding.avatarImageView)
                             */
+                        }
 
-                            // Kotiln Image Library - coil
-                            binding.avatarImageView.load(user.avatarUrl) {
-                                crossfade(3000)
-                                transformations(
-                                    CircleCropTransformation(),
-                                    GrayscaleTransformation(),
-                                )
-                            }
-
-
+                        // Kotiln Image Library - coil
+                        //  => Coroutine
+                        binding.avatarImageView.load(user.avatarUrl) {
+                            crossfade(3000)
+                            transformations(
+                                CircleCropTransformation(),
+                                GrayscaleTransformation(),
+                            )
                         }
 
 
