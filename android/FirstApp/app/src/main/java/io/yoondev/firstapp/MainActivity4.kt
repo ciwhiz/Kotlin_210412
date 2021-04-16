@@ -137,7 +137,7 @@ class MainActivity4 : AppCompatActivity() {
 
         binding.loadButton.setOnClickListener {
 
-            githubApi.searchUser("hello")
+            githubApi.searchUser("hello", per_page = 100)
                 .enqueue(object : Callback<UserSearchResult> {
                     override fun onResponse(
                         call: Call<UserSearchResult>,
@@ -175,6 +175,26 @@ class MainActivity4 : AppCompatActivity() {
         }
     }
 }
+
+
+inline fun <T> Call<T>.enqueue(
+    crossinline onResponse: (response: Response<T>) -> Unit,
+    crossinline onFailure: (t: Throwable) -> Unit,
+) = object : Callback<T> {
+    override fun onResponse(call: Call<T>, response: Response<T>) = onResponse(response)
+    override fun onFailure(call: Call<T>, t: Throwable) = onFailure(t)
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
