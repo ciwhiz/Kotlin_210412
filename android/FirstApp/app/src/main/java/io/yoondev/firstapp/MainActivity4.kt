@@ -77,7 +77,7 @@ class MainActivity4 : AppCompatActivity() {
 
         binding.loadButton.setOnClickListener {
 
-            val call = githubApi.getUser("Kotlin")
+            val call = githubApi.getUser("JakeWharton")
             call.enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful.not())
