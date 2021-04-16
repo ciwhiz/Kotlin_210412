@@ -248,3 +248,39 @@ class AutoClearedValue<T : Any>(val fragment: Fragment) : ReadWriteProperty<Frag
  */
 fun <T : Any> Fragment.autoCleared() = AutoClearedValue<T>(this)
 
+
+class MainFragment4 : Fragment() {
+
+    // onDestroyView에 대한 처리를 자동으로 하는 프로퍼티 위임 객체
+    private var binding: MainFragmentBinding by autoCleared()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = MainFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.nameTextView.text = "Hello2"
+        binding.okButton.setOnClickListener {
+            Toast.makeText(view.context, "Hello!!!!", Toast.LENGTH_SHORT).show()
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
