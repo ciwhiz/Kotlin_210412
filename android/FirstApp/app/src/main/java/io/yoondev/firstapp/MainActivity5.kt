@@ -207,19 +207,55 @@ class MainActivity5 : AppCompatActivity() {
                 )
             */
 
+            /*
             // shuffled / first
-
             githubApi.searchUserRx("hello", perPage = 100)
                 .map { result ->
                     result.items.shuffled()
                 }
+                /*
                 .mapOptional {
                     Optional.ofNullable(it.firstOrNull())
+                }
+                */
+                .filter {
+                    it.isNotEmpty()
+                }
+                .map {
+                    it.first()
                 }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onNext = { user ->
                         updateUi(user)
+                    },
+                    onError = this::ignoreError
+                )
+             */
+
+
+            githubApi.searchUserRx("hello", perPage = 100)
+                // Observable<UserSearchResult> -> map -> Observable<List<User>>
+                .map {
+                    it.items.shuffled()
+                }
+                .filter {
+                    it.isNotEmpty()
+                }
+                // Observable<List<User>> -> map -> Observable<User>
+                .map {
+                    it.first()
+                }
+                // Observable<User> -> map     -> Observable<Observable<User>>
+                // Observable<User> -> flatMap -> Observable<User>
+                .flatMap {
+                    githubApi.getUserRx(it.login)
+                }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onNext = { user ->
+                        updateUi(user)
+                        toast(user.location ?: "Unknown")
                     },
                     onError = this::ignoreError
                 )
