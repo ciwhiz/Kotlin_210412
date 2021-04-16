@@ -2,12 +2,17 @@ package io.yoondev.firstapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import coil.load
+import coil.transform.CircleCropTransformation
+import coil.transform.GrayscaleTransformation
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import io.yoondev.firstapp.databinding.MainActivity3Binding
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -19,6 +24,7 @@ import retrofit2.http.Path
 //   2) ResponseBody -> JSON -> gson -> User
 //      : converter
 //   3) runOnUiThread
+//      : Callback<T> - onResponse / onFailure가 "main thread"에서 동작합니다.
 
 
 // 1. API Interface 정의
@@ -70,6 +76,32 @@ class MainActivity4 : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.loadButton.setOnClickListener {
+
+            val call = githubApi.getUser("JakeWharton")
+            call.enqueue(object : Callback<User> {
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    if (response.isSuccessful.not())
+                        return
+
+                    val user = response.body() ?: return toast("Empty Body")
+
+                    binding.loginTextView.text = user.login
+                    binding.nameTextView.text = user.name
+                    binding.avatarImageView.load(user.avatarUrl) {
+                        crossfade(3000)
+                        transformations(
+                            CircleCropTransformation(),
+                            GrayscaleTransformation(),
+                        )
+                    }
+                }
+
+                override fun onFailure(call: Call<User>, t: Throwable) {
+                    toast("Network Error - ${t.localizedMessage}")
+                }
+
+            })
+
 
         }
     }
