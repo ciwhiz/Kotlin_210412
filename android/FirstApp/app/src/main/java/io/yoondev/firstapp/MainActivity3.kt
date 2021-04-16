@@ -40,6 +40,8 @@ import java.io.IOException
 //     : "null"
 //  => proguard 예외로 등록해야 합니다. - Reflection
 //  dto.User
+
+/*
 data class User(
     val login: String,
     val id: Int,
@@ -49,6 +51,7 @@ data class User(
     val company: String?,
     val email: String?,
 )
+*/
 
 // - Java(JVM) vs C#(CLR)
 //  C#: const     / readonly

@@ -41,6 +41,19 @@ import retrofit2.http.Query
 }
 */
 
+data class User(
+    val login: String,
+    val id: Int,
+    // @field:SerializedName("avatar_url") val avatarUrl: String,
+    val avatarUrl: String,
+    val name: String?,
+    val company: String?,
+    val email: String?,
+
+    val location: String?
+)
+
+
 data class UserSearchResult(
     val totalCount: Int,
     val incompleteResults: Boolean,
@@ -132,6 +145,7 @@ class MainActivity4 : AppCompatActivity() {
     */
 
 
+    /*
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -183,10 +197,59 @@ class MainActivity4 : AppCompatActivity() {
 
                 })
             */
-
-
         }
     }
+    */
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+        binding.loadButton.setOnClickListener {
+
+
+            // searchUser -> getUser -> location
+
+
+            githubApi.searchUser("hello", per_page = 100)
+                .enqueue(
+                    onResponse = onResponse@{ response ->
+                        if (response.isSuccessful.not())
+                            return@onResponse
+
+                        val login =
+                            response.body()?.items?.shuffled()?.firstOrNull()?.login
+                                ?: return@onResponse toast(
+                                    "Empty result"
+                                )
+
+                        githubApi.getUser(login)
+                            .enqueue(
+                                onResponse = onResponseInner@{ responseUser ->
+
+                                    if (responseUser.isSuccessful.not())
+                                        return@onResponseInner
+
+                                    val user = responseUser.body()
+                                        ?: return@onResponseInner toast("Empty User")
+                                    updateUi(user)
+                                    toast("Location: ${user.location ?: "Unknown"}")
+
+                                }, onFailure = { t ->
+                                    toast("Error - ${t.localizedMessage}")
+                                }
+                            )
+
+
+                    },
+                    onFailure = { t ->
+                        toast("Error - ${t.localizedMessage}")
+                    }
+                )
+        }
+    }
+
 
     fun updateUi(user: User) {
         binding.loginTextView.text = user.login
