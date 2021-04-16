@@ -141,6 +141,14 @@ class MainFragment : Fragment() {
             binding.nameTextView.text = "OK"
         }
     }
+
+    //-----
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+    //-----
+
 }
 
 
@@ -193,6 +201,13 @@ class ListFragment : Fragment() {
             // adapter.notifyDataSetChanged()
         }
     }
+
+    //-----!!!
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+    //-----
 }
 
 // View-Binding X

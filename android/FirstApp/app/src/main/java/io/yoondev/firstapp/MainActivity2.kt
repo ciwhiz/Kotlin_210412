@@ -48,7 +48,7 @@ class ActivityBindingDelegate<T : ViewBinding>(
 
         @Suppress("UNCHECKED_CAST")
         binding = inflateMethod.invoke(null, thisRef.layoutInflater) as T
-        thisRef.setContentView(binding!!.root)
+        // thisRef.setContentView(binding!!.root)
 
         return binding!!
     }
@@ -71,7 +71,7 @@ class MainActivity2 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.mainFrame
+        setContentView(binding.root)
         /*
         binding.nameTextView.text = "hello"
         binding.okButton.setOnClickListener {
@@ -117,12 +117,22 @@ class MainActivity2 : AppCompatActivity() {
 
 
 class MainFragment2 : Fragment(R.layout.main_fragment) {
+
+    /*
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val nameTextView = view.findViewById<TextView>(R.id.nameTextView)
+        nameTextView.text = "Hello"
+    }
+    */
+
     private val binding: MainFragmentBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.nameTextView.text = "Hello"
+        binding.nameTextView.text = "Hello2"
         binding.okButton.setOnClickListener {
             Toast.makeText(view.context, "Hello!!!!", Toast.LENGTH_SHORT).show()
         }
