@@ -137,8 +137,8 @@ class MainActivity4 : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.loadButton.setOnClickListener {
-            /*
-            Log.e("XXX", "xxx")
+
+
             githubApi.searchUser("hello", per_page = 100)
                 .enqueue(
                     onResponse = onResponse@{ response ->
@@ -157,8 +157,7 @@ class MainActivity4 : AppCompatActivity() {
                         toast("Error - ${t.localizedMessage}")
                     }
                 )
-         */
-
+        
 
             /*
             githubApi.searchUser("hello", per_page = 100)
