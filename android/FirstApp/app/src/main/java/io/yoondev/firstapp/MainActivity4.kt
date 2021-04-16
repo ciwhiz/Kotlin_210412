@@ -158,9 +158,7 @@ class MainActivity4 : AppCompatActivity() {
                     override fun onFailure(call: Call<UserSearchResult>, t: Throwable) =
                         toast("Error - ${t.localizedMessage}")
 
-
                 })
-
 
         }
     }
