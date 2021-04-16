@@ -193,6 +193,10 @@ class MainActivity3 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        // val str: String? = "hello"
+        // val length: Int? = str?.length
+
+
         // api.github.com/users/JakeWharton
         binding.loadButton.setOnClickListener {
             val client = OkHttpClient.Builder().apply {
@@ -229,12 +233,11 @@ class MainActivity3 : AppCompatActivity() {
                     }
 
                     /*
-                    response.body?.string()?.let { json ->
+                    response.body?.string()?.let { json: String ->
 
                     }
                     */
-
-
+                    // response.body?.string(): String?
                     val json = response.body?.string() ?: return toast("Empty json")
 
                     val gson = GsonBuilder().apply {
@@ -261,6 +264,16 @@ class MainActivity3 : AppCompatActivity() {
 
 
 }
+
+
+fun Call.enqueue(
+    onResponse: (response: Response) -> Unit,
+    onFailure: (e: IOException) -> Unit
+) = enqueue(object : Callback {
+    override fun onFailure(call: Call, e: IOException) = onFailure(e)
+    override fun onResponse(call: Call, response: Response) = onResponse(response)
+})
+
 
 // Anko
 fun Activity.toast(message: String) =
