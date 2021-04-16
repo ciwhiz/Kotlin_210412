@@ -212,6 +212,8 @@ class MainActivity3 : AppCompatActivity() {
 
 
             val call = client.newCall(request)
+
+            /*
             call.enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     runOnUiThread {
@@ -259,6 +261,38 @@ class MainActivity3 : AppCompatActivity() {
                     }
                 }
             })
+            */
+
+            call.enqueue(
+                onResponse = onResponse@{ response ->
+                    val json = response.body?.string() ?: return@onResponse toast("Empty json")
+
+                    val gson = GsonBuilder().apply {
+                        setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                    }.create()
+
+                    val user = gson.fromJson<User>(json)
+                    runOnUiThread {
+                        binding.loginTextView.text = user.login
+                        binding.nameTextView.text = user.name
+                    }
+
+                    binding.avatarImageView.load(user.avatarUrl) {
+                        crossfade(3000)
+                        transformations(
+                            CircleCropTransformation(),
+                            GrayscaleTransformation(),
+                        )
+                    }
+                },
+                onFailure = { e ->
+                    runOnUiThread {
+                        toast("Network Error - ${e.localizedMessage}")
+                    }
+                }
+            )
+
+
         }
     }
 
