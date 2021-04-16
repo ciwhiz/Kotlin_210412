@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.yoondev.firstapp.databinding.MainActivity3Binding
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -92,6 +93,8 @@ interface GithubApi {
 
     @GET("users/{login}")
     fun getUserRx(@Path("login") login: String): Observable<User>
+    // Observable<List<User>>
+
 }
 
 private val httpClient = OkHttpClient.Builder().apply {
@@ -138,6 +141,7 @@ class MainActivity5 : AppCompatActivity() {
         binding.loadButton.setOnClickListener {
 
             val observable: Observable<User> = githubApi.getUserRx("JakeWharton")
+            /*
             observable.subscribe(
                 // onNext
                 { user ->
@@ -149,6 +153,19 @@ class MainActivity5 : AppCompatActivity() {
                 },
                 // onComplete
                 {
+                    Log.e("TAG", "onComplete")
+                }
+            )
+            */
+            // RxKotlin
+            observable.subscribeBy(
+                onNext = { user ->
+                    Log.e("TAG", "onNext: $user")
+                },
+                onError = { t ->
+                    Log.e("TAG", "onError: ${t.localizedMessage}")
+                },
+                onComplete = {
                     Log.e("TAG", "onComplete")
                 }
             )
