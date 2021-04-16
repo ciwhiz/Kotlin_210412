@@ -3,6 +3,7 @@ package io.yoondev.firstapp
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -152,8 +153,19 @@ class MainActivity3 : AppCompatActivity() {
                         runOnUiThread {
                             binding.loginTextView.text = user.login
                             binding.nameTextView.text = user.name
+
+                            // Glide
+                            //  Annotation - AOP
+                            //  => 코드를 생성할 수 있습니다.
+                            //   1) 런타임 추가적인 작업을 실행
+                            //   2) 컴파일 타임에 코드를 생성해서 작업을 실행 => annotation processor
+                            Glide.with(this)
+                                .load(user.avatarUrl)
+                                .circleCrop()
+                                .into(binding.avatarImageView)
                         }
-                        
+
+
                     }
 
                 }
