@@ -1,6 +1,7 @@
 package io.yoondev.firstapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
 import coil.transform.CircleCropTransformation
@@ -136,6 +137,8 @@ class MainActivity4 : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.loadButton.setOnClickListener {
+            /*
+            Log.e("XXX", "xxx")
             githubApi.searchUser("hello", per_page = 100)
                 .enqueue(
                     onResponse = onResponse@{ response ->
@@ -154,6 +157,8 @@ class MainActivity4 : AppCompatActivity() {
                         toast("Error - ${t.localizedMessage}")
                     }
                 )
+         */
+
 
             /*
             githubApi.searchUser("hello", per_page = 100)
@@ -178,7 +183,8 @@ class MainActivity4 : AppCompatActivity() {
                         toast("Error - ${t.localizedMessage}")
 
                 })
-           */
+            */
+
 
         }
     }
@@ -200,10 +206,10 @@ class MainActivity4 : AppCompatActivity() {
 inline fun <T> Call<T>.enqueue(
     crossinline onResponse: (response: Response<T>) -> Unit,
     crossinline onFailure: (t: Throwable) -> Unit,
-) = object : Callback<T> {
+) = enqueue(object : Callback<T> {
     override fun onResponse(call: Call<T>, response: Response<T>) = onResponse(response)
     override fun onFailure(call: Call<T>, t: Throwable) = onFailure(t)
-}
+})
 
 
 
