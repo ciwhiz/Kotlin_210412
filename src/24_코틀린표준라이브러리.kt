@@ -4,6 +4,7 @@ package ex24
 import java.io.File
 import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
+import java.util.stream.Collectors
 
 // 1. 조건 확인 함수
 //  - 특정한 조건이 참이 아닐 경우 예외를 발생시킵니다.
@@ -69,7 +70,10 @@ fun main() {
             e.startsWith("S")
         }
         .map(String::toUpperCase)
+//        .collect(Collectors.toList())
+
     // .forEach(::println)
+
 
     println(result3)
     for (e in result3) {
