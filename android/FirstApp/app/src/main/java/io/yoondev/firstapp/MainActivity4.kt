@@ -201,7 +201,6 @@ class MainActivity4 : AppCompatActivity() {
     }
 }
 
-
 inline fun <T> Call<T>.enqueue(
     crossinline onResponse: (response: Response<T>) -> Unit,
     crossinline onFailure: (t: Throwable) -> Unit,
