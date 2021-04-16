@@ -3,6 +3,8 @@ package io.yoondev.firstapp
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.GsonBuilder
+import com.google.gson.annotations.SerializedName
 import io.yoondev.firstapp.databinding.MainActivity3Binding
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -33,7 +35,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 data class User(
     val login: String,
     val id: Int,
-    val avatarUrl: String,
+    @field:SerializedName("avatar_url") val avatarUrl: String,
     val name: String?,
     val company: String?,
     val email: String?,
@@ -72,7 +74,7 @@ class MainActivity3 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        
+
         // api.github.com/users/JakeWharton
         binding.loadButton.setOnClickListener {
 
@@ -132,7 +134,15 @@ class MainActivity3 : AppCompatActivity() {
 
                     response.body?.let { body ->
                         val json = body.string()
-                        Log.e(TAG, "Response: $json")
+                        // Log.e(TAG, "Response: $json")
+
+                        val gson = GsonBuilder().apply {
+
+                        }.create()
+
+                        val user = gson.fromJson(json, User::class.java)
+                        Log.e(TAG, "Response: $user")
+
                     }
 
                 }
