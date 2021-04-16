@@ -77,14 +77,13 @@ class MainActivity4 : AppCompatActivity() {
 
         binding.loadButton.setOnClickListener {
 
-            val call = githubApi.getUser("JakeWharton")
+            val call = githubApi.getUser("Kotlin")
             call.enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful.not())
                         return
 
                     val user = response.body() ?: return toast("Empty Body")
-
                     binding.loginTextView.text = user.login
                     binding.nameTextView.text = user.name
                     binding.avatarImageView.load(user.avatarUrl) {
