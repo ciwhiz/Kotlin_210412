@@ -1,7 +1,10 @@
 package io.yoondev.firstapp
 
+import android.app.Activity
+import android.net.Network
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
 import coil.transform.CircleCropTransformation
@@ -12,10 +15,9 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.SerializedName
 import io.yoondev.firstapp.databinding.MainActivity3Binding
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
+import java.io.IOException
 
 
 /*
@@ -186,23 +188,91 @@ class MainActivity3 : AppCompatActivity() {
     }
     */
 
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         // api.github.com/users/JakeWharton
         binding.loadButton.setOnClickListener {
+            val client = OkHttpClient.Builder().apply {
+                addInterceptor(HttpLoggingInterceptor().apply {
+                    level = HttpLoggingInterceptor.Level.BASIC
+                })
+            }.build()
 
+            val request = Request.Builder().apply {
+                get()
+                url("https://api.github.com/users/JakeWharton")
+            }.build()
+
+
+            val call = client.newCall(request)
+            call.enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    runOnUiThread {
+                        toast("Network Error - ${e.localizedMessage}")
+                    }
+
+                    /*
+                    Toast.makeText(
+                        this@MainActivity3,
+                        "Network Error - ${e.localizedMessage}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    */
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    if (response.isSuccessful.not()) {
+                        return
+                    }
+
+                    /*
+                    response.body?.string()?.let { json ->
+
+                    }
+                    */
+
+
+                    val json = response.body?.string() ?: return toast("Empty json")
+
+                    val gson = GsonBuilder().apply {
+                        setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                    }.create()
+
+                    val user = gson.fromJson<User>(json)
+                    runOnUiThread {
+                        binding.loginTextView.text = user.login
+                        binding.nameTextView.text = user.name
+                    }
+
+                    binding.avatarImageView.load(user.avatarUrl) {
+                        crossfade(3000)
+                        transformations(
+                            CircleCropTransformation(),
+                            GrayscaleTransformation(),
+                        )
+                    }
+                }
+            })
         }
     }
 
 
-
 }
+
+// Anko
+fun Activity.toast(message: String) =
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+fun Activity.toastLong(message: String) =
+    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
 
 inline fun <reified T> Gson.fromJson(json: String): T = fromJson(json, T::class.java)
+
+
 
 
 
