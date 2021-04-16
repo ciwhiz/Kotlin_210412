@@ -137,31 +137,39 @@ class MainActivity4 : AppCompatActivity() {
 
         binding.loadButton.setOnClickListener {
 
-            val call = githubApi.getUser("JakeWharton")
-            call.enqueue(object : Callback<User> {
-                override fun onResponse(call: Call<User>, response: Response<User>) {
-                    if (response.isSuccessful.not())
-                        return
+            githubApi.searchUser("hello")
+                .enqueue(object : Callback<UserSearchResult> {
+                    override fun onResponse(
+                        call: Call<UserSearchResult>,
+                        response: Response<UserSearchResult>
+                    ) {
+                        if (response.isSuccessful.not())
+                            return
 
-                    val user = response.body() ?: return toast("Empty Body")
-                    binding.loginTextView.text = user.login
-                    binding.nameTextView.text = user.name
-                    binding.avatarImageView.load(user.avatarUrl) {
-                        crossfade(3000)
-                        transformations(
-                            CircleCropTransformation(),
-                            GrayscaleTransformation(),
-                        )
+                        val user = response.body()?.items?.shuffled()?.firstOrNull()
+                            ?: return toast("Empty!")
+                        updateUi(user)
                     }
-                }
 
-                override fun onFailure(call: Call<User>, t: Throwable) {
-                    toast("Network Error - ${t.localizedMessage}")
-                }
-
-            })
+                    override fun onFailure(call: Call<UserSearchResult>, t: Throwable) =
+                        toast("Error - ${t.localizedMessage}")
 
 
+                })
+
+
+        }
+    }
+
+    fun updateUi(user: User) {
+        binding.loginTextView.text = user.login
+        binding.nameTextView.text = user.name
+        binding.avatarImageView.load(user.avatarUrl) {
+            crossfade(3000)
+            transformations(
+                CircleCropTransformation(),
+                GrayscaleTransformation(),
+            )
         }
     }
 }
