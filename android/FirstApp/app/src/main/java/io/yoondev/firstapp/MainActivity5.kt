@@ -14,6 +14,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.kotlin.plusAssign
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.yoondev.firstapp.databinding.MainActivity3Binding
 import okhttp3.OkHttpClient
@@ -305,6 +306,7 @@ class MainActivity5 : AppCompatActivity() {
         */
 
         // UI 같이 절대 종료되지 않는 Observable에 대한 이벤트 스트림은 반드시 명시적인 해지가 필요합니다.
+        /*
         val disposable1 = binding.loadButton.clicks()
             .subscribeBy(
                 onNext = {
@@ -330,6 +332,31 @@ class MainActivity5 : AppCompatActivity() {
 
         compositeDisposable.add(disposable1)
         compositeDisposable.add(disposable2)
+      */
+
+        compositeDisposable += binding.loadButton.clicks()
+            .subscribeBy(
+                onNext = {
+                    Log.e("XXX", "onNext: onClick")
+                },
+                onError = this::ignoreError,
+                onComplete = {
+                    Log.e("XXX", "onComplete")
+                }
+            )
+
+
+        compositeDisposable += binding.loadButton.clicks()
+            .subscribeBy(
+                onNext = {
+                    Log.e("XXX", "onNext: onClick")
+                },
+                onError = this::ignoreError,
+                onComplete = {
+                    Log.e("XXX", "onComplete")
+                }
+            )
+
     }
 
     override fun onDestroy() {
@@ -339,8 +366,6 @@ class MainActivity5 : AppCompatActivity() {
 
         super.onDestroy()
     }
-
-
 
 
     /*
