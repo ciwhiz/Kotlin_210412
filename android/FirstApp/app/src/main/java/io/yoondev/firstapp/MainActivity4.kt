@@ -17,6 +17,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 // Retrofit
 //  : OKHttpClient를 이용할 때 보일러플레이트를 효과적으로 제거할 수 있습니다.
@@ -29,11 +30,33 @@ import retrofit2.http.Path
 
 // 1. API Interface 정의
 // https://api.github.com/users/JakeWharton
+// https://api.github.com/search/users?q=hello&per_page=5&page=3
+
+/*
+{
+    "total_count": 89257,
+    "incomplete_results": false,
+    "items": []
+}
+*/
+
+data class UserSearchResult(
+    val totalCount: Int,
+    val incompleteResults: Boolean,
+    val items: List<User>,
+)
 
 interface GithubApi {
 
     @GET("users/{login}")
     fun getUser(@Path("login") login: String): Call<User>
+
+    @GET("search/users")
+    fun searchUser(
+        @Query("q") q: String,
+        @Query("page") page: Int = 1,
+        @Query("per_page") per_page: Int = 5
+    ): Call<UserSearchResult>
 }
 
 //-----
@@ -70,6 +93,43 @@ class MainActivity4 : AppCompatActivity() {
     companion object {
         private const val TAG1 = "MainActivity4"
     }
+
+    /*
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+        binding.loadButton.setOnClickListener {
+
+            val call = githubApi.getUser("JakeWharton")
+            call.enqueue(object : Callback<User> {
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    if (response.isSuccessful.not())
+                        return
+
+                    val user = response.body() ?: return toast("Empty Body")
+                    binding.loginTextView.text = user.login
+                    binding.nameTextView.text = user.name
+                    binding.avatarImageView.load(user.avatarUrl) {
+                        crossfade(3000)
+                        transformations(
+                            CircleCropTransformation(),
+                            GrayscaleTransformation(),
+                        )
+                    }
+                }
+
+                override fun onFailure(call: Call<User>, t: Throwable) {
+                    toast("Network Error - ${t.localizedMessage}")
+                }
+
+            })
+
+
+        }
+    }
+    */
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
