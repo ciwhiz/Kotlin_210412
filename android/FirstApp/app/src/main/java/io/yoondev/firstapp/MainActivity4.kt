@@ -136,7 +136,26 @@ class MainActivity4 : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.loadButton.setOnClickListener {
+            githubApi.searchUser("hello", per_page = 100)
+                .enqueue(
+                    onResponse = onResponse@{ response ->
+                        if (response.isSuccessful.not())
+                            return@onResponse
 
+                        val user = response.body()
+                            ?.items
+                            ?.shuffled()
+                            ?.firstOrNull()
+                            ?: return@onResponse toast("Empty!")
+
+                        updateUi(user)
+                    },
+                    onFailure = { t ->
+                        toast("Error - ${t.localizedMessage}")
+                    }
+                )
+
+            /*
             githubApi.searchUser("hello", per_page = 100)
                 .enqueue(object : Callback<UserSearchResult> {
                     override fun onResponse(
@@ -159,6 +178,7 @@ class MainActivity4 : AppCompatActivity() {
                         toast("Error - ${t.localizedMessage}")
 
                 })
+           */
 
         }
     }
