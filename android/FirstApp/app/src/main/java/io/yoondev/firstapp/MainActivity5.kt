@@ -9,8 +9,11 @@ import coil.transform.CircleCropTransformation
 import coil.transform.GrayscaleTransformation
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
+import com.jakewharton.rxbinding4.view.clicks
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.yoondev.firstapp.databinding.MainActivity3Binding
 import okhttp3.OkHttpClient
@@ -153,6 +156,7 @@ class MainActivity5 : AppCompatActivity() {
         private const val TAG = "MainActivity5"
     }
 
+    /*
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -268,9 +272,9 @@ class MainActivity5 : AppCompatActivity() {
 
 
         }
-
-
     }
+
+    */
 
     fun updateUi(user: User) {
         binding.loginTextView.text = user.login
@@ -283,6 +287,61 @@ class MainActivity5 : AppCompatActivity() {
             )
         }
     }
+
+
+    // var disposable1: Disposable? = null
+    // var disposable2: Disposable? = null
+
+    private val compositeDisposable = CompositeDisposable()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+        /*
+        binding.loadButton.setOnClickListener {
+            Log.e("XXX", "onClick")
+        }
+        */
+
+        // UI 같이 절대 종료되지 않는 Observable에 대한 이벤트 스트림은 반드시 명시적인 해지가 필요합니다.
+        val disposable1 = binding.loadButton.clicks()
+            .subscribeBy(
+                onNext = {
+                    Log.e("XXX", "onNext: onClick")
+                },
+                onError = this::ignoreError,
+                onComplete = {
+                    Log.e("XXX", "onComplete")
+                }
+            )
+
+
+        val disposable2 = binding.loadButton.clicks()
+            .subscribeBy(
+                onNext = {
+                    Log.e("XXX", "onNext: onClick")
+                },
+                onError = this::ignoreError,
+                onComplete = {
+                    Log.e("XXX", "onComplete")
+                }
+            )
+
+        compositeDisposable.add(disposable1)
+        compositeDisposable.add(disposable2)
+    }
+
+    override fun onDestroy() {
+        // disposable1?.dispose()
+        // disposable2?.dispose()
+        compositeDisposable.dispose()
+
+        super.onDestroy()
+    }
+
+
+
 
     /*
     fun ignoreError(t: Throwable) {
