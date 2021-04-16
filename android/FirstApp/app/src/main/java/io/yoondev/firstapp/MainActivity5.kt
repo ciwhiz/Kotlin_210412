@@ -1,6 +1,7 @@
 package io.yoondev.firstapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
@@ -126,12 +127,54 @@ class MainActivity5 : AppCompatActivity() {
     private val binding: MainActivity3Binding by viewBinding()
 
     companion object {
-        private const val TAG1 = "MainActivity5"
+        private const val TAG = "MainActivity5"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+
+        binding.loadButton.setOnClickListener {
+
+            val observable: Observable<User> = githubApi.getUserRx("JakeWharton")
+            observable.subscribe(
+                // onNext
+                { user ->
+                    Log.e("TAG", "onNext: $user")
+                },
+                // onError
+                { t ->
+                    Log.e("TAG", "onError: ${t.localizedMessage}")
+                },
+                // onComplete
+                {
+                    Log.e("TAG", "onComplete")
+                }
+            )
+
+
+        }
+
+
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
