@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FirstApp">
 
-        <activity android:name=".MainActivity4">
+        <activity android:name=".MainActivity5">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -21,6 +21,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".MainActivity2" />
         <activity android:name=".MainActivity3" />
+        <activity android:name=".MainActivity4" />
     </application>
 
 </manifest>
