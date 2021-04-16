@@ -3,6 +3,9 @@ package io.yoondev.firstapp
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import coil.load
+import coil.transform.CircleCropTransformation
+import coil.transform.GrayscaleTransformation
 import com.bumptech.glide.Glide
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -159,10 +162,23 @@ class MainActivity3 : AppCompatActivity() {
                             //  => 코드를 생성할 수 있습니다.
                             //   1) 런타임 추가적인 작업을 실행
                             //   2) 컴파일 타임에 코드를 생성해서 작업을 실행 => annotation processor
+                            /*
                             Glide.with(this)
                                 .load(user.avatarUrl)
                                 .circleCrop()
                                 .into(binding.avatarImageView)
+                            */
+
+                            // Kotiln Image Library - coil
+                            binding.avatarImageView.load(user.avatarUrl) {
+                                crossfade(3000)
+                                transformations(
+                                    CircleCropTransformation(),
+                                    GrayscaleTransformation(),
+                                )
+                            }
+
+
                         }
 
 
