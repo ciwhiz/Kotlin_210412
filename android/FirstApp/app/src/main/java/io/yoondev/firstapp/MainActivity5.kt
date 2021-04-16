@@ -23,6 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.util.*
 
 // Reactive eXtension => Rx
 //  => 비동기 연산을 컬렉션을 다루는 것처럼 일반적인 연산을 통해 처리할 수 있다.
@@ -105,7 +106,7 @@ interface GithubApi {
     fun searchUserRx(
         @Query("q") q: String,
         @Query("page") page: Int = 1,
-        @Query("per_page") per_page: Int = 5
+        @Query("per_page") perPage: Int = 5
     ): Observable<UserSearchResult>
 
 }
@@ -208,12 +209,12 @@ class MainActivity5 : AppCompatActivity() {
 
             // shuffled / first
 
-            githubApi.searchUserRx("hello")
+            githubApi.searchUserRx("hello", perPage = 100)
                 .map { result ->
                     result.items.shuffled()
                 }
-                .map {
-                    it.first()
+                .mapOptional {
+                    Optional.ofNullable(it.firstOrNull())
                 }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
