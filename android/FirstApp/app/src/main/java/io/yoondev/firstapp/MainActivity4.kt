@@ -146,8 +146,12 @@ class MainActivity4 : AppCompatActivity() {
                         if (response.isSuccessful.not())
                             return
 
-                        val user = response.body()?.items?.shuffled()?.firstOrNull()
+                        val user = response.body()
+                            ?.items
+                            ?.shuffled()
+                            ?.firstOrNull()
                             ?: return toast("Empty!")
+
                         updateUi(user)
                     }
 
