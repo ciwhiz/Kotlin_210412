@@ -100,7 +100,13 @@ interface GithubApi {
 
     @GET("users/{login}")
     fun getUserRx(@Path("login") login: String): Observable<User>
-    // Observable<List<User>>
+
+    @GET("search/users")
+    fun searchUserRx(
+        @Query("q") q: String,
+        @Query("page") page: Int = 1,
+        @Query("per_page") per_page: Int = 5
+    ): Observable<UserSearchResult>
 
 }
 
@@ -183,8 +189,9 @@ class MainActivity5 : AppCompatActivity() {
                 )
            */
 
+            /*
             observable
-//                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onNext = { user ->
                         Log.e("TAG", "onNext: $user")
@@ -197,7 +204,7 @@ class MainActivity5 : AppCompatActivity() {
                     // }
                     onError = this::ignoreError  // Bound reference
                 )
-
+            */
 
         }
 
