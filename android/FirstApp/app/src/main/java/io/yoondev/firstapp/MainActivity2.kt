@@ -126,7 +126,6 @@ class MainFragment2 : Fragment(R.layout.main_fragment) {
         nameTextView.text = "Hello"
     }
     */
-
     private val binding: MainFragmentBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
