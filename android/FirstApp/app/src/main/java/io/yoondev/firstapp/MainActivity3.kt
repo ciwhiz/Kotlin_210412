@@ -3,6 +3,7 @@ package io.yoondev.firstapp
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.SerializedName
 import io.yoondev.firstapp.databinding.MainActivity3Binding
@@ -35,7 +36,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 data class User(
     val login: String,
     val id: Int,
-    @field:SerializedName("avatar_url") val avatarUrl: String,
+    // @field:SerializedName("avatar_url") val avatarUrl: String,
+    val avatarUrl: String,
     val name: String?,
     val company: String?,
     val email: String?,
@@ -137,7 +139,7 @@ class MainActivity3 : AppCompatActivity() {
                         // Log.e(TAG, "Response: $json")
 
                         val gson = GsonBuilder().apply {
-
+                            setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                         }.create()
 
                         val user = gson.fromJson(json, User::class.java)
