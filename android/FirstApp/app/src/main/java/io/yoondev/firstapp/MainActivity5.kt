@@ -3,8 +3,12 @@ package io.yoondev.firstapp
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import coil.load
+import coil.transform.CircleCropTransformation
+import coil.transform.GrayscaleTransformation
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.yoondev.firstapp.databinding.MainActivity3Binding
@@ -73,6 +77,8 @@ import retrofit2.http.Query
 
 // 4. Scheduler
 //   : 작업을 수행할 스레드를 제어할 수 있습니다.
+//   - observeOn: 작업을 수행할 스레드를 지정합니다.
+//   - subscribeOn: Observable의 로직이 수행되는 컨텍스트(스레드)를 지정합니다.
 
 // 5. Disposable
 //   : Observer가 Observable을 구독할 때 '이벤트 스트림'이 생성됩니다.
@@ -158,22 +164,40 @@ class MainActivity5 : AppCompatActivity() {
             )
             */
             // RxKotlin
-            observable.subscribeBy(
-                onNext = { user ->
-                    Log.e("TAG", "onNext: $user")
-                },
-                onError = { t ->
-                    Log.e("TAG", "onError: ${t.localizedMessage}")
-                },
-                onComplete = {
-                    Log.e("TAG", "onComplete")
-                }
-            )
+            observable
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onNext = { user ->
+                        Log.e("TAG", "onNext: $user")
+
+
+                        updateUi(user)
+
+                    },
+                    onError = { t ->
+                        Log.e("TAG", "onError: ${t.localizedMessage}")
+                    },
+                    onComplete = {
+                        Log.e("TAG", "onComplete")
+                    }
+                )
 
 
         }
 
 
+    }
+
+    fun updateUi(user: User) {
+        binding.loginTextView.text = user.login
+        binding.nameTextView.text = user.name
+        binding.avatarImageView.load(user.avatarUrl) {
+            crossfade(enable = true)
+            transformations(
+                CircleCropTransformation(),
+                GrayscaleTransformation(),
+            )
+        }
     }
 
 }
