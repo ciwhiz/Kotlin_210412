@@ -60,6 +60,7 @@ data class UserSearchResult(
     val items: List<User>,
 )
 
+/*
 interface GithubApi {
 
     @GET("users/{login}")
@@ -72,6 +73,7 @@ interface GithubApi {
         @Query("per_page") per_page: Int = 5
     ): Call<UserSearchResult>
 }
+
 
 //-----
 // 2. OKHttpClient 객체 생성
@@ -99,6 +101,8 @@ private val retrofit: Retrofit = Retrofit.Builder().apply {
 
 // 4. GithubApi 객체를 생성합니다.
 val githubApi: GithubApi = retrofit.create(GithubApi::class.java)
+*/
+
 //------
 
 class MainActivity4 : AppCompatActivity() {

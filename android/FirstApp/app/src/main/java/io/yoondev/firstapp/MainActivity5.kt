@@ -2,8 +2,20 @@ package io.yoondev.firstapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.FieldNamingPolicy
+import com.google.gson.GsonBuilder
+import io.reactivex.rxjava3.core.Observable
 import io.yoondev.firstapp.databinding.MainActivity3Binding
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
+import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 // Reactive eXtension => Rx
 //  => 비동기 연산을 컬렉션을 다루는 것처럼 일반적인 연산을 통해 처리할 수 있다.
@@ -64,7 +76,50 @@ import io.yoondev.firstapp.databinding.MainActivity3Binding
 //   : Observer가 Observable을 구독할 때 '이벤트 스트림'이 생성됩니다.
 //     이벤트 스트림 자원입니다. => 명시적인 종료가 필요합니다(dispose)
 
+interface GithubApi {
 
+    @GET("users/{login}")
+    fun getUser(@Path("login") login: String): Call<User>
+
+    @GET("search/users")
+    fun searchUser(
+        @Query("q") q: String,
+        @Query("page") page: Int = 1,
+        @Query("per_page") per_page: Int = 5
+    ): Call<UserSearchResult>
+
+
+    @GET("users/{login}")
+    fun getUserRx(@Path("login") login: String): Observable<User>
+}
+
+private val httpClient = OkHttpClient.Builder().apply {
+    addInterceptor(HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BASIC
+    })
+
+}.build()
+
+
+private val retrofit: Retrofit = Retrofit.Builder().apply {
+
+    baseUrl("https://api.github.com/")
+    client(httpClient)
+
+    val gson = GsonBuilder().apply {
+        setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+    }.create()
+
+    addConverterFactory(GsonConverterFactory.create(gson))
+
+    // Call Adapter
+    //  Call<T>  -> Observable<T>
+    addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+
+}.build()
+
+
+val githubApi: GithubApi = retrofit.create(GithubApi::class.java)
 
 
 class MainActivity5 : AppCompatActivity() {
