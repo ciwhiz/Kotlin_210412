@@ -86,6 +86,12 @@ import java.util.*
 //   : Observer가 Observable을 구독할 때 '이벤트 스트림'이 생성됩니다.
 //     이벤트 스트림 자원입니다. => 명시적인 종료가 필요합니다(dispose)
 
+
+// RxBinding
+//  => UI의 비동기 이벤트를 Observable를 통해서 다룰 수 있습니다.
+//    implementation 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
+//    implementation 'com.jakewharton.rxbinding4:rxbinding-material:4.0.0'
+
 interface GithubApi {
 
     @GET("users/{login}")
