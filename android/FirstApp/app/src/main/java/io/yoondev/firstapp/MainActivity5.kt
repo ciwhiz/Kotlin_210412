@@ -360,7 +360,6 @@ class MainActivity5 : AppCompatActivity() {
             )
         */
 
-
         compositeDisposable += binding.loadButton.clicks()   // Observable<Unit>
             .throttleFirst(3, TimeUnit.SECONDS)
             .flatMap {
@@ -388,12 +387,14 @@ class MainActivity5 : AppCompatActivity() {
             )
 
 
-
     }
 
     override fun onDestroy() {
         // disposable1?.dispose()
         // disposable2?.dispose()
+
+        // compositeDisposable.clear()
+
         compositeDisposable.dispose()
 
         super.onDestroy()
