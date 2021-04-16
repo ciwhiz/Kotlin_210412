@@ -146,13 +146,19 @@ class MainActivity3 : AppCompatActivity() {
                         // val user = gson.fromJson(json, User::class.java)
                         val user: User = gson.fromJson(json)
                         Log.e(TAG, "Response: $user")
+
+
+                        // UI 업데이트는 반드시 메인 스레드를 통해 처리되어야 합니다.
+                        runOnUiThread {
+                            binding.loginTextView.text = user.login
+                            binding.nameTextView.text = user.name
+                        }
+                        
                     }
 
                 }
 
             }.start()
-
-
         }
     }
 }
