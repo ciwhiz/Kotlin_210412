@@ -61,9 +61,9 @@ class MainActivity3 : AppCompatActivity() {
         private val TAG = MainActivity3::class.java.simpleName
     }
 
-    init {
-        // System.loadLibrary("HelloJni")
-    }
+    // init {
+    //    System.loadLibrary("HelloJni")
+    // }
 
     // JNI
     //   Java:   native void foo()
@@ -71,7 +71,8 @@ class MainActivity3 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setContentView(binding.root)
+        
         // api.github.com/users/JakeWharton
         binding.loadButton.setOnClickListener {
 
@@ -85,6 +86,7 @@ class MainActivity3 : AppCompatActivity() {
             */
 
             Thread {
+
 
                 // 1. OKHttpClient 객체 생성
                 val client = OkHttpClient.Builder().apply {
