@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.FieldNamingPolicy
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.SerializedName
 import io.yoondev.firstapp.databinding.MainActivity3Binding
@@ -142,9 +143,9 @@ class MainActivity3 : AppCompatActivity() {
                             setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                         }.create()
 
-                        val user = gson.fromJson(json, User::class.java)
+                        // val user = gson.fromJson(json, User::class.java)
+                        val user: User = gson.fromJson(json)
                         Log.e(TAG, "Response: $user")
-
                     }
 
                 }
@@ -156,6 +157,8 @@ class MainActivity3 : AppCompatActivity() {
     }
 }
 
+
+inline fun <reified T> Gson.fromJson(json: String): T = fromJson(json, T::class.java)
 
 
 
